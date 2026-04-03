@@ -80,7 +80,7 @@ h1, h2 {
 
 .program-image img {
   width: 100%;
-  height: 800px;              /* FIX HEIGHT */
+  height: auto;              /* FIX HEIGHT */
   object-fit: cover;
 
   /* THIS CROPS TOP PART */
@@ -88,7 +88,11 @@ h1, h2 {
 
   border-radius: 12px;
 }
-
+@media (max-width: 768px) {
+  .program-image img {
+    max-height: 240px;
+  }
+}
 .footer-logo {
   margin-bottom: 20px;
 }
@@ -1252,32 +1256,90 @@ a {
 }
 
 /* MOBILE MENU */
+/* OVERLAY (adds depth like Apple UI) */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 999;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* SIDEBAR */
 .mobile-menu {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 70%;
+  width: 85%;
   height: 100vh;
-  background: #fff;
-  padding: 80px 30px;
 
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(14px);
+
+  padding: 80px 28px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 
-  transition: 0.3s ease;
+  border-left: 1px solid rgba(0,0,0,0.08);
+
+  transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 1000;
 }
+@media (max-width: 768px) {
 
-.mobile-menu a {
-  font-size: 18px;
-  text-decoration: none;
-  color: #111;
+  .container {
+    padding: 0 16px;
+  }
+
+  section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .card,
+  .blog-card,
+  .resource-card,
+  .timeline-content {
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.06);
+
+    box-shadow: 
+      0 6px 20px rgba(0,0,0,0.04),
+      0 1px 3px rgba(0,0,0,0.03);
+  }
 }
-
 /* OPEN STATE */
 .mobile-menu.open {
   right: 0;
+}
+
+/* LINKS */
+.mobile-menu a {
+  font-size: 20px;
+  font-weight: 500;
+  color: #111;
+}
+
+/* CLOSE BUTTON */
+.menu-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 26px;
+  cursor: pointer;
 }
 
 /* MOBILE MODE */
@@ -1628,4 +1690,23 @@ a {
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 14px 16px;
+  }
+}
+
+.card:active,
+.blog-card:active,
+.resource-card:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 768px) {
+  p {
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
 }
