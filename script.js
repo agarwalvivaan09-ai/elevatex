@@ -7,20 +7,23 @@ fetch("navbar.html")
     const toggle = document.getElementById("menuToggle");
     const menu = document.getElementById("mobileMenu");
     const overlay = document.getElementById("overlay");
-const closeBtn = document.getElementById("closeMenu");
+    const closeBtn = document.getElementById("closeMenu");
 
-toggle.onclick = () => {
-  menu.classList.add("open");
-  overlay.classList.add("active");
-};
+    // OPEN
+    toggle.addEventListener("click", () => {
+      menu.classList.add("open");
+      overlay.classList.add("active");
+    });
 
-closeBtn.onclick = closeMenu;
-overlay.onclick = closeMenu;
+    // CLOSE
+    function closeMenu() {
+      menu.classList.remove("open");
+      overlay.classList.remove("active");
+    }
 
-function closeMenu() {
-  menu.classList.remove("open");
-  overlay.classList.remove("active");
-}
+    closeBtn.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", closeMenu);
+  });
   document.addEventListener("DOMContentLoaded", () => {
 
   /* ===== METRICS ===== */
