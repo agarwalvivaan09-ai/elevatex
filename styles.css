@@ -1753,3 +1753,21 @@ a {
     line-height: 1.75;
   }
 }
+
+.member-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.member-links a {
+  font-size: 16px;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+
+.member-links a:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
