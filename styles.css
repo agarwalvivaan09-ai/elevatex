@@ -816,7 +816,7 @@ a {
   width: 100%;
   height: 320px;   /* increased from 220 → more vertical space */
   object-fit: cover;
-  object-position: 22% 35%; /* THIS is the key fix */
+  object-position: 22% 45%; /* THIS is the key fix */
   border-radius: 10px;
   margin-bottom: 12px;
 }
