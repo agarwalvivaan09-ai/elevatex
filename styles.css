@@ -28,11 +28,20 @@ body {
 /* NAVBAR */
 .navbar {
   position: sticky;
-  top: 0;
-  background: #F7F6F2;
+  top: 16px;
+  margin: 0 20px;
+
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.06);
+
   display: flex;
   justify-content: space-between;
-  padding: 20px 60px;
+  padding: 14px 24px;
+
+  z-index: 100;
 }
 h1, h2 {
   letter-spacing: -0.4px;
