@@ -373,3 +373,12 @@ a.card:hover .media img { transform: scale(1.03); }
 .back-link { font-size: 15px; font-weight: 600; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
 .back-link::before { content: '←'; transition: transform 0.15s; }
 .back-link:hover::before { transform: translateX(-3px); }
+
+/* The three founders (homepage "How it started") */
+.founders-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.founders-trio a { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px; }
+.founders-trio img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 30%; border-radius: 14px; transition: transform 0.2s; }
+.founders-trio a:nth-child(2) { margin-top: 28px; }
+.founders-trio a:hover img { transform: translateY(-3px); }
+.founders-trio a:hover { color: var(--green); }
+@media (max-width: 640px) { .founders-trio { gap: 10px; } .founders-trio a { font-size: 13px; } .founders-trio a:nth-child(2) { margin-top: 18px; } }
