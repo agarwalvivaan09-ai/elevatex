@@ -851,6 +851,24 @@ a {
   filter: contrast(1.05) brightness(1.02);
 }
 
+/* Shown when a team member has no photo yet */
+.team-initials {
+  width: 100%;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #E7EFE9, #F4F2ED);
+  color: #1F3D2B;
+  font-size: 64px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .team-initials { height: 260px; }
+}
+
 .team-card h3 {
   margin-bottom: 4px;
 }
@@ -1357,6 +1375,11 @@ a {
 /* OPEN STATE */
 .mobile-menu.open {
   right: 0;
+}
+
+/* The closed phone menu sits off-screen to the right; don't let it make pages scroll sideways. */
+html {
+  overflow-x: clip;
 }
 
 /* LINKS */

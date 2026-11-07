@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elevate-x.in/sitemap.xml

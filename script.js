@@ -70,7 +70,8 @@ const timeline = document.querySelector(".timeline");
 const progress = document.querySelector(".timeline-progress");
 const items = document.querySelectorAll(".timeline-item");
 
-window.addEventListener("scroll", () => {
+// Only the Timeline page has a timeline; skip this on every other page.
+if (timeline && progress) window.addEventListener("scroll", () => {
   const rect = timeline.getBoundingClientRect();
   const windowHeight = window.innerHeight;
 
