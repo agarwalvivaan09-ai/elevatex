@@ -481,6 +481,24 @@ h2 {
   background: rgba(0,0,0,0.05);
 }
 
+/* VOLUNTEER LOGIN (links to the ElevateX Volunteer Hub) */
+.navbar .btn.btn-hub {
+  background: #1F3D2B;
+  color: #fff !important;
+  border-color: #1F3D2B;
+  margin-left: 10px;
+}
+
+.navbar .btn.btn-hub:hover {
+  background: #2C5A3F;
+}
+
+.mobile-menu a.mobile-hub {
+  margin-top: 12px;
+  color: #1F3D2B;
+  font-weight: 600;
+}
+
 /* CTA BUTTON */
 .section.center .btn {
   margin-top: 24px;
