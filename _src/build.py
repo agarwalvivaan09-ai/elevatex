@@ -118,7 +118,7 @@ def footer():
           <li><a href="about.html">About us</a></li>
           <li><a href="team.html">Team</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="resources.html">Certificates</a></li>
+          <li><a href="verify.html">Check a certificate</a></li>
           <li><a href="{APPLY}">Apply to join</a></li>
           <li><a href="{HUB}">Volunteer login</a></li>
         </ul>

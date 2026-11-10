@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check a certificate | ElevateX</title>
+<meta name="description" content="Check an ElevateX certificate. Type a certificate ID or a name to see the record from the ElevateX certificate registry.">
+<link rel="canonical" href="https://elevate-x.in/verify.html">
+<meta property="og:title" content="Check a certificate | ElevateX">
+<meta property="og:description" content="Check an ElevateX certificate. Type a certificate ID or a name to see the record from the ElevateX certificate registry.">
+<meta property="og:url" content="https://elevate-x.in/verify.html">
+<meta property="og:image" content="https://elevate-x.in/image1ex.jpg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ElevateX">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1F3D2B">
+
+
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link rel="apple-touch-icon" href="logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><img loading="lazy" decoding="async" src="logo-icon.png" alt="" width="38" height="38">ElevateX</a>
+    <nav class="nav-links" aria-label="Main"><a href="about.html">About</a><a href="welfare.html">Drives</a><a href="fundraising.html">Events</a><a href="unnati.html">Unnati</a><a href="team.html">Team</a><a href="timeline.html">Timeline</a><a href="blog.html">Blog</a><a href="resources.html" aria-current=page>Resources</a></nav>
+    <div class="nav-actions">
+      <a href="contact.html" class="btn btn-ghost">Apply</a>
+      <a href="https://hub.elevate-x.in" class="btn btn-primary">Volunteer login</a>
+    </div>
+    <button class="menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="scrim"></div>
+  <div class="sheet">
+    <div class="sheet-top">
+      <a href="index.html" class="brand"><img loading="lazy" decoding="async" src="logo-icon.png" alt="" width="38" height="38">ElevateX</a>
+      <button class="sheet-close" aria-label="Close menu">×</button>
+    </div>
+    <nav aria-label="Main"><a href="about.html">About</a><a href="welfare.html">Drives</a><a href="fundraising.html">Events</a><a href="unnati.html">Unnati</a><a href="team.html">Team</a><a href="timeline.html">Timeline</a><a href="blog.html">Blog</a><a href="resources.html" aria-current=page>Resources</a></nav>
+    <div class="sheet-actions">
+      <a href="contact.html" class="btn btn-ghost">Apply to join</a>
+      <a href="https://hub.elevate-x.in" class="btn btn-primary">Volunteer login</a>
+    </div>
+    <div class="sheet-social"><a href="https://www.instagram.com/elevate.x._/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/company/elevat-ex/" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/elevatex182276?s=21" target="_blank" rel="noopener">X</a></div>
+  </div>
+</div>
+<main id="main">
+<section class="page-head">
+  <div class="wrap narrow" style="margin:0 auto">
+    <span class="eyebrow">Certificates</span>
+    <h1>Check a certificate</h1>
+    <p class="lede">Every certificate ElevateX issues is listed in our registry. Type the certificate ID, or the person's name, to see the record.</p>
+  </div>
+</section>
+
+<section class="section tight" style="padding-top:8px">
+  <div class="wrap narrow" style="margin:0 auto">
+    <form class="verify-form" id="verifyForm" role="search">
+      <label for="verifyQ" class="verify-label">Certificate ID or name</label>
+      <input id="verifyQ" name="q" placeholder="Certificate ID or full name" autocomplete="off" minlength="3" required>
+      <button class="btn btn-primary" type="submit">Check</button>
+    </form>
+    <p class="small muted" id="verifyStatus" aria-live="polite" style="margin-top:12px">Loading the registry…</p>
+    <div id="verifyResults" class="verify-results"></div>
+    <p class="small muted" style="margin-top:28px">The registry is kept by the ElevateX HR team and updates here as soon as it changes. Something wrong? Write to <a href="mailto:elevate.x.20.25.ad@gmail.com">elevate.x.20.25.ad@gmail.com</a>.</p>
+  </div>
+</section>
+<script src="verify.js" defer></script>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="logo-icon.png" alt="" width="40" height="40" loading="lazy">ElevateX</div>
+        <p>A nonprofit run by school students in Kolkata. Drives, financial literacy classes, and the events that pay for them.</p>
+        <p><a href="mailto:elevate.x.20.25.ad@gmail.com">elevate.x.20.25.ad@gmail.com</a></p>
+      </div>
+      <div>
+        <h4>What we do</h4>
+        <ul>
+          <li><a href="welfare.html">Drives</a></li>
+          <li><a href="unnati.html">Project Unnati</a></li>
+          <li><a href="fundraising.html">Events &amp; fundraisers</a></li>
+          <li><a href="euphoria.html">Euphoria</a></li>
+          <li><a href="timeline.html">Timeline</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>ElevateX</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="verify.html">Check a certificate</a></li>
+          <li><a href="contact.html">Apply to join</a></li>
+          <li><a href="https://hub.elevate-x.in">Volunteer login</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul><li><a href="https://www.instagram.com/elevate.x._/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.linkedin.com/company/elevat-ex/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://x.com/elevatex182276?s=21" target="_blank" rel="noopener">X</a></li><li><a href="https://chat.whatsapp.com/F1YwvNztn4LJTFXM8NR43r?mode=hqctcli" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="https://linktr.ee/elevate.x" target="_blank" rel="noopener">Linktree</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ElevateX · Kolkata, India</span>
+      <span>Website by Vivaan Agarwal</span>
+    </div>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>
