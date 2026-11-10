@@ -424,3 +424,20 @@ a.card:hover .media img { transform: scale(1.03); }
 .verify-form { flex-wrap: wrap; }
 .verify-form .verify-label { flex-basis: 100%; margin-bottom: 0; }
 .verify-form input { flex: 1; }
+
+/* Volunteer Hub showcase */
+.shot { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 1px 2px rgba(23,25,28,.05), 0 18px 40px -18px rgba(23,25,28,.22); margin: 0; }
+.shot img { display: block; width: 100%; height: auto; }
+.shot-bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: var(--bg-2); border-bottom: 1px solid var(--line); }
+.shot-bar i { width: 10px; height: 10px; border-radius: 50%; background: #d9d3c6; }
+.shot-bar span { margin-left: 12px; font-size: 13px; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 2px 12px; }
+.shot-hero { max-width: 1120px; margin: 0 auto; }
+.shot-note { text-align: center; font-size: 14px; color: var(--muted); margin: 16px 0 0; }
+.hub-split { grid-template-columns: 1fr 1.25fr; }
+.hub-split.flip { grid-template-columns: 1.25fr 1fr; }
+.hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.hub-grid figure { margin: 0; }
+.hub-grid figcaption { margin-top: 14px; font-size: 15px; color: var(--ink-2); line-height: 1.5; }
+.hub-grid figcaption b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 4px; }
+@media (max-width: 960px) { .hub-split, .hub-split.flip { grid-template-columns: 1fr; } .hub-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .hub-grid { grid-template-columns: 1fr; } .shot-bar span { display: none; } }
