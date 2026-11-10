@@ -7,27 +7,63 @@ nav: apply
   <div class="wrap">
     <span class="eyebrow">Join</span>
     <h1>Join ElevateX</h1>
-    <p class="lede">ElevateX is for school students who'd rather run things than just turn up. Fill in a short form and someone from our HR team will get in touch.</p>
-    <div class="btn-row" style="margin-top:28px">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfop2ZyhCKIi1QpHOSsDOlP60qswZ0HF0hjd51sUFrAfQdR8w/viewform?usp=sharing&amp;ouid=105765937949538192540" target="_blank" rel="noopener" class="btn btn-primary">Open the application form</a>
-      <a href="https://hub.elevate-x.in" class="btn btn-ghost">Already a member? Log in</a>
-    </div>
+    <p class="lede">ElevateX is for school students who'd rather run things than just turn up. Fill in the form below and our HR team will get back to you, usually by email.</p>
+    <p class="small" style="margin-top:14px">Already a member? <a href="https://hub.elevate-x.in">Log in to the Volunteer Hub</a>.</p>
   </div>
 </section>
 
-<section class="section tint">
-  <div class="wrap">
-    <div class="section-head reveal">
+<section class="section tight" style="padding-top:8px">
+  <div class="wrap apply-grid">
+    <form class="apply-form" id="applyForm" novalidate>
+      <div class="form-row">
+        <label>Full name<input name="name" required maxlength="120" autocomplete="name"></label>
+        <label>Email<input name="email" type="email" required maxlength="200" autocomplete="email"></label>
+      </div>
+      <div class="form-row">
+        <label>Phone <span class="opt">(optional)</span><input name="phone" type="tel" maxlength="30" autocomplete="tel"></label>
+        <label>City <span class="opt">(optional)</span><input name="city" maxlength="80" value="Kolkata"></label>
+      </div>
+      <div class="form-row">
+        <label>School<input name="school" required maxlength="200"></label>
+        <label>Class <span class="opt">(optional)</span><input name="grade" maxlength="30" placeholder="e.g. Class 10"></label>
+      </div>
+      <fieldset>
+        <legend>Which departments interest you? <span class="opt">(pick any, or none if you're not sure)</span></legend>
+        <div class="check-grid">
+          <label class="check"><input type="checkbox" name="departments" value="finance">Finance</label>
+          <label class="check"><input type="checkbox" name="departments" value="marketing">Marketing</label>
+          <label class="check"><input type="checkbox" name="departments" value="hr">HR</label>
+          <label class="check"><input type="checkbox" name="departments" value="project-operations">Project Operations</label>
+          <label class="check"><input type="checkbox" name="departments" value="drive-execution">Drive Execution</label>
+        </div>
+      </fieldset>
+      <label>Why do you want to join?<textarea name="why" required maxlength="2000" rows="5" placeholder="A few lines is plenty. What would you like to do, and what can you bring?"></textarea></label>
+      <div class="form-row">
+        <label>When are you usually free? <span class="opt">(optional)</span><input name="availability" maxlength="300" placeholder="e.g. Weekends, weekday evenings"></label>
+        <label>How did you hear about us? <span class="opt">(optional)</span><input name="heard" maxlength="200" placeholder="e.g. A friend, Instagram"></label>
+      </div>
+      <label class="hp" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label>
+      <label class="check consent"><input type="checkbox" name="consent" required>I agree that ElevateX can contact me about my application. If I'm under 18, a parent or guardian knows I'm applying.</label>
+      <p class="form-error" id="applyError" role="alert" hidden></p>
+      <button class="btn btn-primary" type="submit" id="applyBtn">Send application</button>
+    </form>
+    <div class="apply-done card" id="applyDone" hidden>
+      <span class="eyebrow">Received</span>
+      <h2>Thanks for applying</h2>
+      <p>Your application has gone straight to our HR team. They'll get in touch by email, usually within a week. Meanwhile, follow us on <a href="https://www.instagram.com/elevate.x._/" target="_blank" rel="noopener">Instagram</a> to see what we're up to.</p>
+    </div>
+    <aside class="apply-side">
       <h2>What being a member looks like</h2>
-      <p>You join one department, volunteer at drives and help run events. Tasks come from your department head, and the hours you volunteer are verified and recorded on our Volunteer Hub.</p>
-    </div>
-    <div class="cards">
-      <div class="card reveal"><div class="body"><span class="tag">Finance</span><p>Budgets for drives and events, approving spending, keeping receipts.</p></div></div>
-      <div class="card reveal"><div class="body"><span class="tag">Marketing</span><p>Instagram, filming drives and events, campaigns and partnerships.</p></div></div>
-      <div class="card reveal"><div class="body"><span class="tag">HR</span><p>Recruiting and onboarding members, and checking in on how people are doing.</p></div></div>
-      <div class="card reveal"><div class="body"><span class="tag">Project Operations</span><p>Running our fundraisers, from the first idea to the décor.</p></div></div>
-      <div class="card reveal"><div class="body"><span class="tag">Drive Execution</span><p>Planning drives, logistics on the day, and Project Unnati sessions.</p></div></div>
-      <div class="card reveal" style="background:var(--green-soft)"><div class="body"><span class="tag">Questions?</span><p>Write to <a href="mailto:elevate.x.20.25.ad@gmail.com">elevate.x.20.25.ad@gmail.com</a> and we'll answer.</p></div></div>
-    </div>
+      <p>You join one department, volunteer at drives and help run events. Tasks come from your department head, and you earn credits every time you're marked present at a drive, event or meeting.</p>
+      <ul>
+        <li><b>Finance</b> · budgets for drives and events, receipts</li>
+        <li><b>Marketing</b> · Instagram, filming, campaigns</li>
+        <li><b>HR</b> · recruiting, onboarding, looking after members</li>
+        <li><b>Project Operations</b> · running our fundraisers</li>
+        <li><b>Drive Execution</b> · planning drives and Project Unnati</li>
+      </ul>
+      <p class="small">Questions? Write to <a href="mailto:elevate.x.20.25.ad@gmail.com">elevate.x.20.25.ad@gmail.com</a>.</p>
+    </aside>
   </div>
 </section>
+<script src="apply.js" defer></script>

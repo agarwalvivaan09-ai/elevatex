@@ -382,3 +382,45 @@ a.card:hover .media img { transform: scale(1.03); }
 .founders-trio a:hover img { transform: translateY(-3px); }
 .founders-trio a:hover { color: var(--green); }
 @media (max-width: 640px) { .founders-trio { gap: 10px; } .founders-trio a { font-size: 13px; } .founders-trio a:nth-child(2) { margin-top: 18px; } }
+
+/* ---------------------------------------------------------------- apply form */
+.apply-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+.apply-form, .apply-done { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: grid; gap: 18px; }
+.apply-form label { display: grid; gap: 6px; font-size: 15px; font-weight: 600; color: var(--ink); }
+.apply-form .opt { font-weight: 400; color: var(--muted); font-size: 13.5px; }
+.apply-form input:not([type=checkbox]), .apply-form textarea, .verify-form input {
+  font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border-radius: 10px; border: 1px solid #d9d3c5; background: #fff; color: var(--ink); width: 100%;
+}
+.apply-form input:focus, .apply-form textarea:focus, .verify-form input:focus { outline: 2px solid var(--sky); outline-offset: 1px; border-color: var(--sky); }
+.apply-form textarea { resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.apply-form fieldset { border: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.apply-form legend { font-size: 15px; font-weight: 600; padding: 0; margin-bottom: 8px; }
+.check-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.apply-form .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; font-size: 15px; }
+.apply-form .check input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--green); flex-shrink: 0; }
+.apply-form .consent { font-weight: 400; color: var(--ink-2); font-size: 14.5px; }
+.apply-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-error { background: #fde8e6; color: #9b1c12; border-radius: 10px; padding: 10px 14px; font-size: 15px; margin: 0; }
+.apply-form .btn { justify-self: start; padding: 14px 28px; font-size: 16px; }
+.apply-side h2 { font-size: 24px; margin-bottom: 12px; }
+.apply-side p, .apply-side li { color: var(--ink-2); }
+.apply-side ul { padding-left: 1.1em; display: grid; gap: 6px; margin: 16px 0; }
+@media (max-width: 900px) { .apply-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .form-row, .check-grid { grid-template-columns: 1fr; } .apply-form, .apply-done { padding: 20px 18px; } .apply-form .btn { width: 100%; } }
+
+/* ---------------------------------------------------------------- certificate lookup */
+.verify-form { display: flex; gap: 10px; }
+.verify-form .btn { padding: 12px 24px; }
+.verify-results { display: grid; gap: 14px; margin-top: 18px; }
+.verify-card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--leaf); border-radius: var(--radius); padding: 20px 22px; }
+.verify-card.none { border-left-color: var(--coral); }
+.verify-card .ok { display: inline-block; font-size: 13px; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+.verify-card dl { display: grid; grid-template-columns: minmax(110px, auto) 1fr; gap: 8px 16px; margin: 0; font-size: 15.5px; }
+.verify-card dt { color: var(--muted); }
+.verify-card dd { margin: 0; font-weight: 500; }
+@media (max-width: 520px) { .verify-form { flex-direction: column; } .verify-card dl { grid-template-columns: 1fr; gap: 2px; } .verify-card dd { margin-bottom: 8px; } }
+.verify-label { display: block; font-weight: 600; margin-bottom: 8px; }
+.verify-form { flex-wrap: wrap; }
+.verify-form .verify-label { flex-basis: 100%; margin-bottom: 0; }
+.verify-form input { flex: 1; }

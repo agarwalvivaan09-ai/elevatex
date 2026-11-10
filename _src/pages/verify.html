@@ -1,0 +1,26 @@
+<!--
+title: Check a certificate
+description: Check an ElevateX certificate. Type a certificate ID or a name to see the record from the ElevateX certificate registry.
+nav: resources
+-->
+<section class="page-head">
+  <div class="wrap narrow" style="margin:0 auto">
+    <span class="eyebrow">Certificates</span>
+    <h1>Check a certificate</h1>
+    <p class="lede">Every certificate ElevateX issues is listed in our registry. Type the certificate ID, or the person's name, to see the record.</p>
+  </div>
+</section>
+
+<section class="section tight" style="padding-top:8px">
+  <div class="wrap narrow" style="margin:0 auto">
+    <form class="verify-form" id="verifyForm" role="search">
+      <label for="verifyQ" class="verify-label">Certificate ID or name</label>
+      <input id="verifyQ" name="q" placeholder="Certificate ID or full name" autocomplete="off" minlength="3" required>
+      <button class="btn btn-primary" type="submit">Check</button>
+    </form>
+    <p class="small muted" id="verifyStatus" aria-live="polite" style="margin-top:12px">Loading the registry…</p>
+    <div id="verifyResults" class="verify-results"></div>
+    <p class="small muted" style="margin-top:28px">The registry is kept by the ElevateX HR team and updates here as soon as it changes. Something wrong? Write to <a href="mailto:elevate.x.20.25.ad@gmail.com">elevate.x.20.25.ad@gmail.com</a>.</p>
+  </div>
+</section>
+<script src="verify.js" defer></script>
