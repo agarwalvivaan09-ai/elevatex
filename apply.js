@@ -47,25 +47,52 @@
       consent: { booleanValue: true },
       status: { stringValue: 'new' },
     };
-    try {
-      const res = await fetch(`${ENDPOINT}/projects/${PROJECT}/databases/(default)/documents:commit?key=${KEY}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          writes: [{
-            update: { name, fields },
-            currentDocument: { exists: false },
-            updateTransforms: [{ fieldPath: 'createdAt', setToServerValue: 'REQUEST_TIME' }],
-          }],
-        }),
-      });
-      if (!res.ok) throw new Error(String(res.status));
+    const body = JSON.stringify({
+      writes: [{
+        update: { name, fields },
+        currentDocument: { exists: false },
+        updateTransforms: [{ fieldPath: 'createdAt', setToServerValue: 'REQUEST_TIME' }],
+      }],
+    });
+    // Sent as text/plain so the browser doesn't need a separate permission check (CORS preflight) first.
+    // Each try gives up after 15 seconds instead of waiting forever; a second try follows automatically.
+    const attempt = async () => {
+      const ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+      const timer = ctrl && setTimeout(() => ctrl.abort(), 15000);
+      try {
+        const res = await fetch(`${ENDPOINT}/projects/${PROJECT}/databases/(default)/documents:commit?key=${KEY}`, {
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=UTF-8' }, body, signal: ctrl ? ctrl.signal : undefined,
+        });
+        if (res.ok) return true;
+        // The first try reached the server but its reply got lost: the application is already saved.
+        const text = await res.text().catch(() => '');
+        if (/ALREADY_EXISTS|FAILED_PRECONDITION/.test(text)) return true;
+        return false;
+      } catch (_) {
+        return false;
+      } finally {
+        if (timer) clearTimeout(timer);
+      }
+    };
+    const slow = setTimeout(() => { btn.textContent = 'Still sending… slow connection'; }, 6000);
+    let ok = await attempt();
+    if (!ok) { btn.textContent = 'Trying again…'; ok = await attempt(); }
+    clearTimeout(slow);
+    if (ok) {
       try { localStorage.setItem('ex-applied', String(Date.now())); } catch (_) { /* ignore */ }
       done();
-    } catch (_) {
-      btn.disabled = false;
-      btn.textContent = 'Send application';
-      showError("Sorry, that didn't go through. Check your connection and try again, or email elevate.x.20.25.ad@gmail.com.");
+      return;
+    }
+    btn.disabled = false;
+    btn.textContent = 'Send application';
+    showError("Sorry, your application couldn't be sent from this connection. Try again on another network (for example mobile data or Wi-Fi), or use the button below to send it by email instead.");
+    const mail = document.getElementById('applyMail');
+    if (mail) {
+      const lines = [['Name', val('name')], ['Email', val('email')], ['Phone', val('phone')], ['School', val('school')], ['Class', val('grade')], ['City', val('city')],
+        ['Departments', d.getAll('departments').join(', ')], ['Why I want to join', val('why')], ['How I heard about ElevateX', val('heard')], ['Availability', val('availability')]];
+      const text = lines.filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join('\n');
+      mail.href = `mailto:elevate.x.20.25.ad@gmail.com?subject=${encodeURIComponent('Application to join ElevateX: ' + val('name'))}&body=${encodeURIComponent(text)}`;
+      mail.hidden = false;
     }
   });
 
