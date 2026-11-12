@@ -21,7 +21,10 @@
     if (val('website')) { done(); return; } // filled by a bot
     if (val('name').length < 2) return showError('Please add your full name.');
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val('email'))) return showError('Please check your email address.');
+    if (val('phone').replace(/\D/g, '').length < 7) return showError('Please add a phone number we can reach you on.');
+    if (val('city').length < 2) return showError('Please tell us your city.');
     if (!val('school')) return showError('Please tell us your school.');
+    if (!val('grade')) return showError('Please tell us your class.');
     if (val('why').length < 10) return showError('Please write a line or two about why you want to join.');
     if (!d.get('consent')) return showError('Please tick the box at the bottom to agree.');
     try {
