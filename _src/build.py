@@ -157,7 +157,7 @@ def page(meta, body):
     url = f'{SITE}/' if name == 'index.html' else f'{SITE}/{name}'
     title = meta['title']
     full_title = title if 'ElevateX' in title else f'{title} | ElevateX'
-    image = meta.get('image', 'image1ex.jpg')
+    image = meta.get('image', 'elevatex-team-kolkata.jpg')
     return f'''<!DOCTYPE html>
 <html lang="en-IN">
 <head>
@@ -267,11 +267,11 @@ def build_articles():
         body = f'''<article class="article"><div class="wrap narrow">
   <a href="team.html" class="back-link">Team</a>
   <p class="meta" style="margin-top:22px">Founder's note · {esc(who)}, {esc(role)}</p>
-  <h1>A note from {esc(who.split()[0])}</h1>
+  <h1>A note from {esc(who.split()[0])}, ElevateX co-founder</h1>
   <div class="text">{article_body(a, 'founder')}</div>
   <div class="article-foot"><a href="team.html" class="arrow-link">Meet the team</a><a href="blog.html" class="arrow-link">Read the blog</a></div>
 </div></article>'''
-        pages.append(({'file': f'{key}.html', 'title': f"A note from {who}", 'description': f"Why ElevateX exists, in {who.split()[0]}'s words. {who}: {role}.", 'nav': 'team', 'ogtype': 'article', 'image': 'image1ex.jpg'}, body))
+        pages.append(({'file': f'{key}.html', 'title': f"A note from {who}", 'description': f"Why ElevateX exists, in {who.split()[0]}'s words. {who}: {role}.", 'nav': 'team', 'ogtype': 'article', 'image': 'elevatex-team-kolkata.jpg'}, body))
     posts = []
     for key in ['blog4', 'blog1', 'blog2', 'blog3']:
         a = data[key]
@@ -294,7 +294,7 @@ def build_articles():
     )
     blog = f'''<section class="page-head"><div class="wrap">
   <span class="eyebrow">Blog</span>
-  <h1>Written by our members</h1>
+  <h1>The ElevateX blog: written by our members</h1>
   <p class="lede">What it has been like to build ElevateX, from the people doing it. Unedited, in their own words.</p>
 </div></section>
 <section class="section tight" style="padding-top:8px"><div class="wrap"><div class="post-list">{items}</div></div></section>'''
