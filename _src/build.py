@@ -100,7 +100,7 @@ def footer():
     <div class="footer-grid">
       <div>
         <div class="footer-brand"><img src="logo-icon.png" alt="" width="40" height="40" loading="lazy">ElevateX</div>
-        <p>A nonprofit run by school students in Kolkata. Drives, financial literacy classes, and the events that pay for them.</p>
+        <p>ElevateX (Elevate X) is a nonprofit run by school students in Kolkata. Drives, financial literacy classes, and the events that pay for them.</p>
         <p><a href="mailto:{EMAIL}">{EMAIL}</a></p>
       </div>
       <div>
@@ -138,6 +138,20 @@ def footer():
 </footer>'''
 
 
+# Structured data for the homepage: tells Google that "ElevateX" and "Elevate X" are the same
+# organisation, and links the official social profiles to the website.
+SCHEMA = """<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"NGO","@id":"https://elevate-x.in/#org","name":"ElevateX","alternateName":["Elevate X","ElevateX Kolkata","Elevate X Kolkata","ElevateX Nonprofit"],
+"url":"https://elevate-x.in/","logo":"https://elevate-x.in/logo-icon.png","foundingDate":"2025-03-08",
+"description":"ElevateX is a nonprofit run by school students in Kolkata: welfare drives, Project Unnati financial literacy workshops, and fundraising events.",
+"areaServed":"Kolkata, India","address":{"@type":"PostalAddress","addressLocality":"Kolkata","addressRegion":"West Bengal","addressCountry":"IN"},
+"email":"elevate.x.20.25.ad@gmail.com",
+"sameAs":["https://www.instagram.com/elevate.x._/","https://www.linkedin.com/company/elevat-ex/","https://x.com/elevatex182276","https://linktr.ee/elevate.x"]},
+{"@type":"WebSite","@id":"https://elevate-x.in/#website","name":"ElevateX","alternateName":"Elevate X","url":"https://elevate-x.in/","publisher":{"@id":"https://elevate-x.in/#org"}}
+]}
+</script>"""
+
 def page(meta, body):
     name = meta['file']
     url = f'{SITE}/' if name == 'index.html' else f'{SITE}/{name}'
@@ -161,6 +175,7 @@ def page(meta, body):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1F3D2B">
 {'<meta name="google-site-verification" content="BRuGEfzzq23Uh3XquKvL4vKrcuAyaFd01iYPJiQE5AU">' if name == 'index.html' else ''}
+{SCHEMA if name == 'index.html' else ''}
 {meta.get('extra_head', '')}
 <link rel="icon" type="image/png" href="logo-icon.png">
 <link rel="apple-touch-icon" href="logo-icon.png">
