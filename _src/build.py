@@ -145,6 +145,7 @@ SCHEMA = """<script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"NGO","@id":"https://elevate-x.in/#org","name":"ElevateX","alternateName":["Elevate X","ElevateX Kolkata","Elevate X Kolkata","ElevateX Nonprofit"],
 "url":"https://elevate-x.in/","logo":"https://elevate-x.in/logo-icon.png","foundingDate":"2025-03-08",
+"founder":[{"@id":"https://elevate-x.in/team.html#vivaan"},{"@id":"https://elevate-x.in/team.html#devyansh"},{"@id":"https://elevate-x.in/team.html#samridh"}],
 "description":"ElevateX is a nonprofit run by school students in Kolkata: welfare drives, Project Unnati financial literacy workshops, and fundraising events.",
 "areaServed":"Kolkata, India","address":{"@type":"PostalAddress","addressLocality":"Kolkata","addressRegion":"West Bengal","addressCountry":"IN"},
 "email":"elevate.x.20.25.ad@gmail.com",
@@ -152,6 +153,57 @@ SCHEMA = """<script type="application/ld+json">
 {"@type":"WebSite","@id":"https://elevate-x.in/#website","name":"ElevateX","alternateName":"Elevate X","url":"https://elevate-x.in/","publisher":{"@id":"https://elevate-x.in/#org"}}
 ]}
 </script>"""
+
+# People: tells Google who founded and runs ElevateX, so searches for their names connect to the
+# organisation. Same names, roles, photos and links as the Team page.
+FOUNDERS = [
+    ('vivaan', 'Vivaan Agarwal', 'Founder, former CEO & Chairman', 'founder.html', 'elevatex-vivaan-agarwal.jpg',
+     ['https://www.instagram.com/vivaan_agarwal__/', 'https://agarwalvivaan09-ai.github.io/vivaan-agarwal-website-3.0/']),
+    ('devyansh', 'Devyansh Tolasaria', 'Founder, former COO & Vice Chairman', 'founder2.html', 'elevatex-devyansh-tolasaria.jpeg',
+     ['https://www.instagram.com/devyanshtolasaria_7']),
+    ('samridh', 'Samridh Sanganeria', 'Founder, former CFO', 'founder3.html', 'elevatex-samridh-sanganeria.jpeg',
+     ['https://www.instagram.com/samridhsanganeria']),
+]
+ADVISORS = [
+    ('krishank', 'Krishank Jain', 'Former CFO', 'elevatex-krishank-jain.jpg', ['https://www.instagram.com/krishankjain_']),
+    ('kaschith', 'Kaschith Saraogi', 'Former Head of Drives', 'elevatex-kaschith-saraogi.jpg', ['https://www.instagram.com/kaschith_saraogi']),
+    ('abhaay', 'Abhaay Jhawar', 'Former CMO & Head of Operations', 'elevatex-abhaay-jhawar.jpeg',
+     ['https://www.instagram.com/abhaay09', 'https://www.linkedin.com/in/abhaay-jhawar-054734370']),
+    ('pragya', 'Pragya Chharia', 'Chief Marketing Officer', 'elevatex-pragya-chharia.jpg', ['https://www.instagram.com/pragyachharia._']),
+    ('nityam', 'Nityam Chaurasia', 'Director of Events', None, []),
+    ('yaahvi', 'Yaahvi Kamalia', 'Director of Events', 'elevatex-yaahvi-kamalia.jpg', ['https://www.instagram.com/yaahvikamalia']),
+]
+ORG = {'@id': f'{SITE}/#org'}
+
+
+def person(key, name, role, url, image, links):
+    p = {'@type': 'Person', '@id': f'{SITE}/team.html#{key}', 'name': name, 'jobTitle': role,
+         'worksFor': ORG, 'url': f'{SITE}/{url}'}
+    if image:
+        p['image'] = f'{SITE}/{image}'
+    if links:
+        p['sameAs'] = links
+    return p
+
+
+FOUNDER_NODES = {f[3]: person(f[0], f[1], f[2], f[3], f[4], f[5]) for f in FOUNDERS}
+ADVISOR_NODES = [person(a[0], a[1], a[2], 'team.html', a[3], a[4]) for a in ADVISORS]
+
+
+def ld(data):
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
+
+
+def people_schema(name):
+    """Founders and advisors on the Team page; the founder on each founder's note."""
+    if name == 'team.html':
+        return ld({'@context': 'https://schema.org', '@type': 'NGO', '@id': ORG['@id'], 'name': 'ElevateX',
+                   'founder': [{'@id': p['@id']} for p in FOUNDER_NODES.values()],
+                   'member': list(FOUNDER_NODES.values()) + ADVISOR_NODES})
+    if name in FOUNDER_NODES:
+        return ld({'@context': 'https://schema.org', '@type': 'ProfilePage', 'mainEntity': FOUNDER_NODES[name]})
+    return ''
+
 
 # Breadcrumbs: the trail Google can show above a result (elevate-x.in › Blog › Post).
 # Pages not listed here sit directly under the homepage.
@@ -203,7 +255,7 @@ def page(meta, body):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1F3D2B">
 {'<meta name="google-site-verification" content="BRuGEfzzq23Uh3XquKvL4vKrcuAyaFd01iYPJiQE5AU">' if name == 'index.html' else ''}
-{SCHEMA if name == 'index.html' else breadcrumbs(meta)}
+{SCHEMA if name == 'index.html' else breadcrumbs(meta)}{people_schema(name)}
 {meta.get('extra_head', '')}
 <link rel="icon" type="image/png" href="logo-icon.png">
 <link rel="apple-touch-icon" href="logo-icon.png">
