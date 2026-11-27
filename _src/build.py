@@ -75,7 +75,7 @@ def header(active):
     <a href="index.html" class="brand"><img src="images/brand/logo-icon.png" alt="" width="38" height="38">ElevateX</a>
     <nav class="nav-links" aria-label="Main">{links}</nav>
     <div class="nav-actions">
-      <a href="{HUB}" class="nav-login">Member login</a>
+      <a href="{HUB}" class="btn btn-ghost">Member login</a>
       <a href="{APPLY}" class="btn btn-primary">Join ElevateX</a>
     </div>
     <button class="menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
@@ -91,7 +91,7 @@ def header(active):
     <nav aria-label="Main">{sheet}</nav>
     <div class="sheet-actions">
       <a href="{APPLY}" class="btn btn-primary">Join ElevateX</a>
-      <a href="{HUB}" class="nav-login">Member login</a>
+      <a href="{HUB}" class="btn btn-ghost">Member login</a>
     </div>
     <div class="sheet-social">{social}</div>
   </div>
@@ -267,7 +267,7 @@ def page(meta, body):
 <link rel="apple-touch-icon" href="images/brand/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>

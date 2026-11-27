@@ -30,7 +30,7 @@ Image sizes and previews need Pillow (`pip install pillow`). Keep photos under a
 
 ## Look and feel
 
-`styles.css` explains the design at the top. In short: one typeface (Archivo), wide and heavy for headings, plain white pages, trunk brown text, and banner yellow used only for small labels and highlights. Spacing only uses the scale in `:root` (`--s1` to `--s9`). Nothing fades in on scroll.
+ElevateX's own colours (cream, forest green, brown, and the coral, amber, sky, plum and leaf of the logo's hands), Fraunces for headings and Inter for text. Glass (frosted, see-through panels) is used in a few places only: the header, the phone menu, the photo labels, the numbers on the homepage and the photo viewer. Each glass surface has a solid fallback and turns solid for visitors who turn transparency off in their device settings.
 
 Writing on the site: plain sentences, straight quotes, no em dashes, and one name per action ("Join ElevateX", "Member login").
 
