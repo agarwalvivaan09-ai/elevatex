@@ -37,6 +37,7 @@ NAV = [
     ('welfare.html', 'Drives', 'drives'),
     ('fundraising.html', 'Events', 'events'),
     ('unnati.html', 'Unnati', 'unnati'),
+    ('gallery.html', 'Gallery', 'gallery'),
     ('volunteer-hub.html', 'Hub', 'hub'),
     ('team.html', 'Team', 'team'),
     ('timeline.html', 'Timeline', 'timeline'),
