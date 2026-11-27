@@ -32,14 +32,17 @@ try:
 except ImportError:  # sizes are a nicety; the site still builds without Pillow
     Image = None
 
+# The header shows the main pages; the phone menu and the footer also carry the rest.
 NAV = [
     ('about.html', 'About', 'about'),
     ('welfare.html', 'Drives', 'drives'),
     ('fundraising.html', 'Events', 'events'),
     ('unnati.html', 'Unnati', 'unnati'),
     ('gallery.html', 'Gallery', 'gallery'),
-    ('volunteer-hub.html', 'Hub', 'hub'),
     ('team.html', 'Team', 'team'),
+]
+NAV_MORE = [
+    ('volunteer-hub.html', 'Hub', 'hub'),
     ('timeline.html', 'Timeline', 'timeline'),
     ('blog.html', 'Blog', 'blog'),
     ('resources.html', 'Resources', 'resources'),
@@ -63,7 +66,7 @@ def header(active):
         f'<a href="{href}"{" aria-current=page" if key == active else ""}>{label}</a>' for href, label, key in NAV
     )
     sheet = ''.join(
-        f'<a href="{href}"{" aria-current=page" if key == active else ""}>{label}</a>' for href, label, key in NAV
+        f'<a href="{href}"{" aria-current=page" if key == active else ""}>{label}</a>' for href, label, key in NAV + NAV_MORE
     )
     social = ''.join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in SOCIAL[:3])
     return f'''<a class="skip" href="#main">Skip to content</a>
@@ -111,6 +114,7 @@ def footer():
           <li><a href="welfare.html">Drives</a></li>
           <li><a href="unnati.html">Project Unnati</a></li>
           <li><a href="fundraising.html">Events &amp; fundraisers</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="euphoria.html">Euphoria</a></li>
           <li><a href="timeline.html">Timeline</a></li>
         </ul>
@@ -122,6 +126,7 @@ def footer():
           <li><a href="team.html">Team</a></li>
           <li><a href="volunteer-hub.html">Volunteer Hub</a></li>
           <li><a href="blog.html">Blog</a></li>
+          <li><a href="resources.html">Resources</a></li>
           <li><a href="verify.html">Check a certificate</a></li>
           <li><a href="{APPLY}">Apply to join</a></li>
           <li><a href="{HUB}">Volunteer login</a></li>
@@ -383,6 +388,85 @@ def build_articles():
     return pages
 
 
+GALLERY_GROUPS = [
+    ('drives', 'Drives and Project Unnati', 'Out in Kolkata with food, water, umbrellas, saplings and rubbish bags, and in classrooms teaching money basics.'),
+    ('events', 'Events', 'The fundraisers that pay for every drive.'),
+]
+
+
+def build_gallery():
+    """The Gallery page (an album per drive or event) and one page per album.
+    Albums and photos live in _src/gallery/albums.json; the first photo of each album is its cover."""
+    albums = json.loads((SRC / 'gallery' / 'albums.json').read_text(encoding='utf-8'))
+    total = sum(len(a['photos']) for a in albums)
+    pages = []
+    groups = []
+    for key, title, lede in GALLERY_GROUPS:
+        cards = ''.join(
+            f'''
+      <a class="card reveal" href="gallery-{a['slug']}.html"><div class="media"><img src="{a['photos'][0][0]}" alt="{esc(a['photos'][0][1])}"></div><div class="body"><h3>{esc(a['title'])}</h3><p>{esc(a['lede'])}</p><span class="chip">{len(a['photos'])} photo{'s' if len(a['photos']) != 1 else ''}</span></div></a>'''
+            for a in albums if a['group'] == key)
+        groups.append(f'''<section class="section tight" id="{key}">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>{esc(title)}</h2>
+      <p>{esc(lede)}</p>
+    </div>
+    <div class="cards">{cards}
+    </div>
+  </div>
+</section>''')
+    index = f'''<section class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Gallery</span>
+    <h1>ElevateX in photos</h1>
+    <p class="lede">{total} photos from our drives, Project Unnati and the events that fund them. Pick an album to see all its photos.</p>
+  </div>
+</section>
+''' + '\n'.join(groups)
+    pages.append(({'file': 'gallery.html', 'title': 'Gallery', 'nav': 'gallery', 'image': albums[0]['photos'][0][0],
+                   'description': f'Photos of ElevateX in Kolkata: clean-ups, food, umbrella and plantation drives, stray feeding, Project Unnati and our fundraising events. {total} photos.'}, index))
+    for a in albums:
+        figs = '\n'.join(
+            f'      <figure><a href="{f}" target="_blank" rel="noopener"><img src="{f}" alt="{esc(alt)}"{" data-eager" if i == 0 else ""}></a></figure>'
+            for i, (f, alt) in enumerate(a['photos']))
+        others = [b for b in albums if b['slug'] != a['slug'] and b['group'] == a['group']][:3]
+        more = ''.join(
+            f'''
+      <a class="card reveal" href="gallery-{b['slug']}.html"><div class="media"><img src="{b['photos'][0][0]}" alt="{esc(b['photos'][0][1])}"></div><div class="body"><h3>{esc(b['title'])}</h3><span class="chip">{len(b['photos'])} photo{'s' if len(b['photos']) != 1 else ''}</span></div></a>'''
+            for b in others)
+        more_section = f'''
+<section class="section tight">
+  <div class="wrap">
+    <div class="section-head"><h2>More albums</h2></div>
+    <div class="cards">{more}
+    </div>
+    <p style="margin-top:28px"><a href="gallery.html" class="arrow-link">All albums</a></p>
+  </div>
+</section>''' if others else ''
+        body = f'''<section class="page-head">
+  <div class="wrap">
+    <a href="gallery.html" class="back-link">Gallery</a>
+    <span class="eyebrow" style="display:flex;margin-top:22px">{len(a['photos'])} photos</span>
+    <h1>{esc(a['title'])}</h1>
+    <p class="lede">{esc(a['lede'])}</p>
+  </div>
+</section>
+
+<section class="section tight" style="padding-top:8px">
+  <div class="wrap">
+    <div class="gallery">
+{figs}
+    </div>
+  </div>
+</section>{more_section}'''
+        pages.append(({'file': f"gallery-{a['slug']}.html", 'title': f"{a['title']} photos", 'nav': 'gallery',
+                       'image': a['photos'][0][0],
+                       'description': f"{len(a['photos'])} photos of ElevateX {a['title'].lower()} in Kolkata. {a['lede']}"}, body))
+        PARENTS[f"gallery-{a['slug']}.html"] = ('Gallery', 'gallery.html')
+    return pages
+
+
 REDIRECTS = {'impact.html': 'index.html', 'projects.html': 'index.html#what-we-do'}
 
 
@@ -420,6 +504,7 @@ def main():
         meta['file'] = path.name
         built.append((meta, body))
     built += build_articles()
+    built += build_gallery()
     for meta, body in built:
         (ROOT / meta['file']).write_text(fix_images(page(meta, body)), encoding='utf-8')
     for name, target in REDIRECTS.items():
