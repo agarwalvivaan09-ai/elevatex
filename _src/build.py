@@ -489,12 +489,13 @@ def build_gallery():
 </section>{more_section}'''
         pages.append(({'file': f"gallery-{a['slug']}.html", 'title': f"{a['title']} photos", 'nav': 'gallery',
                        'image': a['photos'][0][0],
-                       'description': f"{len(a['photos'])} photos of ElevateX {a['title'].lower()} in Kolkata. {a['lede']}"}, body))
+                       'description': f"{len(a['photos'])} photo{'s' if len(a['photos']) != 1 else ''} of ElevateX {a['title'].lower()} in Kolkata. {a['lede']}"}, body))
         PARENTS[f"gallery-{a['slug']}.html"] = ('Gallery', 'gallery.html')
     return pages
 
 
-REDIRECTS = {'impact.html': 'index.html', 'projects.html': 'index.html#what-we-do'}
+REDIRECTS = {'impact.html': 'index.html', 'projects.html': 'index.html#what-we-do',
+             'gallery-retrograde-zenith-football-fiesta.html': 'gallery-retrograde.html'}
 
 
 def redirect_page(target):
