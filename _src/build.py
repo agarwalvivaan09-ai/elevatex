@@ -17,6 +17,7 @@ Needs Pillow for image sizes:  pip install pillow
 import html
 import json
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -314,6 +315,24 @@ def redirect_page(target):
 '''
 
 
+def last_changed(file):
+    """Date the page's source last changed in git (YYYY-MM-DD), or '' if unknown."""
+    src = SRC / 'pages' / file
+    target = src if src.exists() else SRC / 'articles' / 'articles.json'
+    try:
+        out = subprocess.run(['git', 'log', '-1', '--format=%cs', '--', str(target)],
+                             cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        out = ''
+    return out
+
+
+def sitemap_entry(path, file):
+    lastmod = last_changed(file)
+    tag = f'<lastmod>{lastmod}</lastmod>' if lastmod else ''
+    return f'  <url><loc>{SITE}/{path}</loc>{tag}</url>'
+
+
 def main():
     built = []
     for path in sorted((SRC / 'pages').glob('*.html')):
@@ -327,8 +346,8 @@ def main():
         (ROOT / name).write_text(redirect_page(target), encoding='utf-8')
     urls = sorted(m['file'] for m, _ in built if m['file'] != '404.html')
     urls.remove('index.html')
-    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', f'  <url><loc>{SITE}/</loc></url>']
-    sitemap += [f'  <url><loc>{SITE}/{u}</loc></url>' for u in urls]
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', sitemap_entry('', 'index.html')]
+    sitemap += [sitemap_entry(u, u) for u in urls]
     sitemap.append('</urlset>')
     (ROOT / 'sitemap.xml').write_text('\n'.join(sitemap) + '\n', encoding='utf-8')
     print(f'Built {len(built)} pages, {len(REDIRECTS)} redirects, sitemap with {len(urls) + 1} URLs.')
