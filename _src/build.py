@@ -26,6 +26,9 @@ SITE = 'https://elevate-x.in'
 HUB = 'https://hub.elevate-x.in'
 APPLY = 'contact.html'
 EMAIL = 'mail@elevate-x.in'
+# Cloudflare Web Analytics (cookie-free visitor counts). Paste the site token from
+# Cloudflare > Analytics & Logs > Web Analytics > elevate-x.in > Manage site. Leave empty to turn it off.
+CF_ANALYTICS_TOKEN = '00ee39fec49b4cd3a453ead437ec0344'
 
 try:
     from PIL import Image
@@ -288,7 +291,7 @@ def page(meta, body):
 {body.strip()}
 </main>
 {footer()}
-<script src="script.js" defer></script>
+<script src="script.js" defer></script>{f'\n<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{{"token": "{CF_ANALYTICS_TOKEN}"}}\'></script>' if CF_ANALYTICS_TOKEN else ''}
 </body>
 </html>
 '''
