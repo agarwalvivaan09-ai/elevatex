@@ -42,10 +42,11 @@ NAV = [
     ('team.html', 'Team', 'team'),
 ]
 NAV_MORE = [
-    ('volunteer-hub.html', 'Volunteer Hub', 'hub'),
-    ('timeline.html', 'Timeline', 'timeline'),
-    ('blog.html', 'Blog', 'blog'),
-    ('resources.html', 'Resources', 'resources'),
+    ('volunteer-hub.html', 'Volunteer Hub', 'hub', 'The members-only app that runs ElevateX'),
+    ('edpi.html', 'Drive score (EDPI)', 'edpi', 'How we score every drive out of 115'),
+    ('timeline.html', 'Timeline', 'timeline', 'From a phone call to 300 members'),
+    ('blog.html', 'Blog', 'blog', 'Written by our members'),
+    ('resources.html', 'Resources', 'resources', 'Certificates, brochure and links'),
 ]
 
 SOCIAL = [
@@ -66,14 +67,23 @@ def header(active):
         f'<a href="{href}"{" aria-current=page" if key == active else ""}>{label}</a>' for href, label, key in NAV
     )
     sheet = ''.join(
-        f'<a href="{href}"{" aria-current=page" if key == active else ""}>{label}</a>' for href, label, key in NAV + NAV_MORE
+        f'<a href="{href}"{" aria-current=page" if key == active else ""}>{label}</a>' for href, label, key, *_ in NAV + NAV_MORE
     )
+    more_items = ''.join(
+        f'<a href="{href}"{" aria-current=page" if key == active else ""}><b>{label}</b><span>{note}</span></a>'
+        for href, label, key, note in NAV_MORE
+    )
+    more_current = ' is-current' if any(key == active for _, _, key, _ in NAV_MORE) else ''
+    more = f'''<div class="nav-more">
+      <button type="button" class="nav-more-btn{more_current}" aria-expanded="false" aria-controls="navMore">More</button>
+      <div class="nav-more-panel" id="navMore" hidden>{more_items}</div>
+    </div>'''
     social = ''.join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in SOCIAL[:3])
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap nav">
     <a href="index.html" class="brand"><img src="images/brand/logo-icon.png" alt="" width="38" height="38">ElevateX</a>
-    <nav class="nav-links" aria-label="Main">{links}</nav>
+    <nav class="nav-links" aria-label="Main">{links}{more}</nav>
     <div class="nav-actions">
       <a href="{HUB}" class="btn btn-ghost">Member login</a>
       <a href="{APPLY}" class="btn btn-primary">Join ElevateX</a>
@@ -114,6 +124,7 @@ def footer():
           <li><a href="welfare.html">Drives</a></li>
           <li><a href="unnati.html">Project Unnati</a></li>
           <li><a href="fundraising.html">Events &amp; fundraisers</a></li>
+          <li><a href="edpi.html">Drive score (EDPI)</a></li>
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="euphoria.html">Euphoria</a></li>
           <li><a href="timeline.html">Timeline</a></li>
@@ -220,6 +231,7 @@ PARENTS = {
     'founder3.html': ('Team', 'team.html'),
     'euphoria.html': ('Events & fundraisers', 'fundraising.html'),
     'verify.html': ('Resources', 'resources.html'),
+    'edpi.html': ('Drives', 'welfare.html'),
 }
 
 

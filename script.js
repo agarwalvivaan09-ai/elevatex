@@ -23,6 +23,24 @@ document.documentElement.classList.add('js');
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('open')) close(); });
 })();
 
+// "More" menu in the desktop header
+(function () {
+  const btn = document.querySelector('.nav-more-btn');
+  const panel = document.getElementById('navMore');
+  if (!btn || !panel) return;
+  const set = (open) => { btn.setAttribute('aria-expanded', String(open)); panel.hidden = !open; };
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    set(open);
+    if (open) panel.querySelector('a').focus();
+  });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.nav-more')) set(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { set(false); btn.focus(); }
+  });
+  panel.addEventListener('focusout', (e) => { if (!e.relatedTarget || !e.relatedTarget.closest('.nav-more')) set(false); });
+})();
+
 // Header border once the page scrolls
 (function () {
   const header = document.querySelector('.site-header');

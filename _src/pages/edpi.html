@@ -1,0 +1,378 @@
+<!--
+title: ElevateX Drive Performance Index (EDPI)
+description: EDPI gives every ElevateX drive one score that shows how well it turned money, people and time into real impact. How it works, the formulas, a worked example and a calculator.
+nav: edpi
+image: images/gallery/elevatex-gallery-clean-up-2.jpg
+-->
+<section class="page-head">
+  <div class="wrap">
+    <h1>ElevateX Drive Performance Index</h1>
+    <p class="lede">One score that shows how well a drive turned money, people and time into real impact. We call it EDPI, and every ElevateX drive gets one.</p>
+    <p class="meta">Designed and developed by <a href="founder.html">Vivaan Agarwal</a> for ElevateX.</p>
+    <nav class="edpi-toc" aria-label="On this page">
+      <a href="#why">Why we built it</a><a href="#steps">How a drive is scored</a><a href="#try">Try it</a><a href="#inputs">Inputs</a><a href="#settings">Fixed settings</a><a href="#calculation">The calculation</a><a href="#example">Worked example</a><a href="#reading">Reading the score</a><a href="#rules">Data rules</a><a href="#limits">Design choices and limits</a>
+    </nav>
+  </div>
+</section>
+
+<section class="section tight" id="why">
+  <div class="wrap">
+    <div class="edpi">
+      <div>
+        <h2>Why we built EDPI</h2>
+        <p>Every ElevateX drive takes money, time and a lot of effort from our members. Until EDPI, there was no clear way to say whether one drive went better than another. A big drive is not always a better drive, and a cheap drive is not always a good one.</p>
+        <p>EDPI gives every drive one score. A drive that does exactly what it planned scores <b>100</b>. It can go above 100 by getting more volunteers than planned and by working with an outside partner. The highest possible score is <b>115</b>.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><div class="row"><span>Impact</span><span>50%</span></div><div class="bar"><i style="width:100%;background:var(--amber)"></i></div><p>Did we actually achieve what we set out to do?</p></div>
+        <div class="pillar"><div class="row"><span>Money</span><span>25%</span></div><div class="bar"><i style="width:50%;background:var(--sky)"></i></div><p>Did we spend wisely, and did we stay inside the fund?</p></div>
+        <div class="pillar"><div class="row"><span>Volunteers</span><span>25%</span></div><div class="bar"><i style="width:50%;background:var(--coral)"></i></div><p>Did enough people show up, and was the work shared fairly?</p></div>
+        <div class="pillar"><div class="row"><span>Partner bonus</span><span>+10</span></div><p>For working with at least one outside partner.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="steps">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How a drive is scored</h2>
+      <p>Every drive follows the same five steps.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Make the plan</h3><p>Before the drive, the organiser fills in six planning values. These are the targets the drive will be judged against.</p></div>
+      <div class="step"><h3>Lock the plan</h3><p>Once the drive starts, nobody changes these values. If targets could be changed afterwards, the score would mean nothing.</p></div>
+      <div class="step"><h3>Run the drive and keep records</h3><p>Receipts for the money spent, a count of the people helped, a sign-in sheet with each volunteer's hours, and a record of the impact achieved.</p></div>
+      <div class="step"><h3>Enter the results</h3><p>After the drive, five values are recorded.</p></div>
+      <div class="step"><h3>Calculate and read the score</h3><p>The result comes from the formulas below and is read against the drive's own plan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight tint" id="try">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Try it</h2>
+      <p>Change any number and the score updates. It starts with the worked example from further down this page.</p>
+    </div>
+    <form class="edpi-calc" id="edpiCalc" novalidate>
+      <fieldset>
+        <legend>Set before the drive</legend>
+        <label>Planned volunteers<input type="number" name="plannedVolunteers" min="1" step="1" value="40" inputmode="numeric"></label>
+        <label>Planned hours per volunteer<input type="number" name="plannedHours" min="0.5" step="0.5" value="4" inputmode="decimal"></label>
+        <label>Budget (Rs.)<input type="number" name="budget" min="1" step="1" value="60000" inputmode="numeric"></label>
+        <label>Impact target<input type="number" name="impactTarget" min="1" step="1" value="1000" inputmode="numeric"></label>
+        <label class="check"><input type="checkbox" name="hasPartner" checked>Worked with an outside partner</label>
+      </fieldset>
+      <fieldset>
+        <legend>Entered after the drive</legend>
+        <label>Money spent (Rs.)<input type="number" name="spent" min="0" step="1" value="50000" inputmode="numeric"></label>
+        <label>People helped<input type="number" name="peopleHelped" min="0" step="1" value="800" inputmode="numeric"></label>
+        <label>Volunteers who came<input type="number" name="volunteers" min="0" step="1" value="50" inputmode="numeric"></label>
+        <label>Total volunteer hours<input type="number" name="totalHours" min="0" step="0.5" value="150" inputmode="decimal"></label>
+        <label>Impact achieved<input type="number" name="impactDone" min="0" step="1" value="900" inputmode="numeric"></label>
+      </fieldset>
+      <div class="edpi-result" aria-live="polite">
+        <p class="edpi-score"><span>EDPI</span><b id="edpiScore">105.89</b><small>out of 115</small></p>
+        <dl id="edpiParts">
+          <div><dt>Money</dt><dd>92.45</dd></div>
+          <div><dt>Volunteers</dt><dd>111.11</dd></div>
+          <div><dt>Impact</dt><dd>90.00</dd></div>
+          <div><dt>Partner bonus</dt><dd>10</dd></div>
+        </dl>
+        <p class="edpi-note" id="edpiNote"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="section tight" id="inputs">
+  <div class="wrap"><div class="prose-wide">
+    <div class="section-head">
+      <h2>Inputs</h2>
+      <p>Every input has a simple name, and the same names are used in every formula.</p>
+    </div>
+    <h3 class="table-title">Entered after the drive</h3>
+    <div class="table-wrap"><table class="data-table">
+      <thead><tr><th>Name</th><th>Meaning</th><th>Unit</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr><td><code>Spent</code></td><td>Total money spent on the drive</td><td>Rs.</td><td>0 or more</td></tr>
+        <tr><td><code>PeopleHelped</code></td><td>Total number of beneficiaries reached</td><td>people</td><td>whole number, 0 or more</td></tr>
+        <tr><td><code>Volunteers</code></td><td>Number of volunteers who actually took part</td><td>people</td><td>whole number, 0 or more</td></tr>
+        <tr><td><code>HoursEach</code></td><td>Hours given by each volunteer (one entry per volunteer)</td><td>hours</td><td>between <code>MinHours</code> and <code>MaxHours</code></td></tr>
+        <tr><td><code>ImpactDone</code></td><td>Impact actually achieved, in the drive's own unit (meals, kg, trees, books)</td><td>impact units</td><td>0 or more</td></tr>
+      </tbody>
+    </table></div>
+    <h3 class="table-title">Set before the drive (locked once it starts)</h3>
+    <div class="table-wrap"><table class="data-table">
+      <thead><tr><th>Name</th><th>Meaning</th><th>Unit</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr><td><code>PlannedVolunteers</code></td><td>Number of volunteers we expect</td><td>people</td><td>more than 0</td></tr>
+        <tr><td><code>PlannedHours</code></td><td>Average hours we expect from each volunteer</td><td>hours</td><td>more than 0</td></tr>
+        <tr><td><code>ImpactTarget</code></td><td>Impact we aim for, in the same unit as <code>ImpactDone</code></td><td>impact units</td><td>more than 0</td></tr>
+        <tr><td><code>Budget</code></td><td>Money set aside for this drive</td><td>Rs.</td><td>more than 0</td></tr>
+        <tr><td><code>NormalCost</code></td><td>Usual cost per beneficiary (currently Rs. 53.42)</td><td>Rs. per person</td><td>more than 0</td></tr>
+        <tr><td><code>HasPartner</code></td><td>1 if the drive has at least one outside partner, otherwise 0</td><td>yes or no</td><td>0 or 1</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+</section>
+
+<section class="section tight" id="settings">
+  <div class="wrap"><div class="prose-wide">
+    <div class="section-head">
+      <h2>Fixed settings</h2>
+      <p>These numbers are set by ElevateX and are the same for every drive. If we ever change one, we change it here and nowhere else. The three weights always add up to 1.</p>
+    </div>
+    <div class="table-wrap"><table class="data-table">
+      <thead><tr><th>Name</th><th>Meaning</th><th class="num">Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>NormalCost</code></td><td>Usual cost per beneficiary</td><td class="num">Rs. 53.42</td></tr>
+        <tr><td><code>OverspendStart</code></td><td>Using more than this share of the fund starts losing points</td><td class="num">1.00 (100%)</td></tr>
+        <tr><td><code>OverspendZero</code></td><td>Share of the fund at which the budget score hits 0</td><td class="num">1.50 (150%)</td></tr>
+        <tr><td><code>TurnoutMax</code></td><td>Highest turnout score allowed</td><td class="num">150</td></tr>
+        <tr><td><code>WMoney</code></td><td>Weight of the money score</td><td class="num">0.25</td></tr>
+        <tr><td><code>WVolunteer</code></td><td>Weight of the volunteer score</td><td class="num">0.25</td></tr>
+        <tr><td><code>WImpact</code></td><td>Weight of the impact score</td><td class="num">0.50</td></tr>
+        <tr><td><code>PartnerBonusMax</code></td><td>Bonus points for an outside partner</td><td class="num">10</td></tr>
+        <tr><td><code>MinHours</code>, <code>MaxHours</code></td><td>Believable hours for one volunteer, used to catch typing mistakes</td><td class="num">0.5 and 24</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+</section>
+
+<section class="section tight tint" id="calculation">
+  <div class="wrap"><div class="prose-wide">
+    <div class="section-head">
+      <h2>The calculation</h2>
+      <p>Four steps. After each formula there's a short note on what it does, why we need it and the thinking behind it.</p>
+    </div>
+
+    <h3 class="calc-step">Step 1: Basic figures</h3>
+    <div class="formula">
+      <p><code>TotalHours</code> = the sum of <code>HoursEach</code> for every volunteer</p>
+      <p><code>AvgHours</code> = <code>TotalHours</code> ÷ <code>Volunteers</code></p>
+      <p><code>CostPerPerson</code> = <code>Spent</code> ÷ <code>PeopleHelped</code></p>
+      <p><code>BudgetUsed</code> = <code>Spent</code> ÷ <code>Budget</code></p>
+    </div>
+    <div class="why">
+      <p><b>What it does.</b> Turns the raw entries into four simple figures: total volunteer hours, average hours per volunteer, money spent per beneficiary, and the share of the fund we used (1.00 means we used all of it).</p>
+      <p><b>Why we need it.</b> We can't fairly compare a small drive with a big one using raw totals. Averages and ratios take the size out of the picture.</p>
+      <p><b>The thinking behind it.</b> Each figure is just an addition or a division. There is no judgement in this step.</p>
+    </div>
+
+    <h3 class="calc-step">Step 2: Four scores</h3>
+    <p>Each score is out of 100, except turnout, which can go higher. A higher score is always better.</p>
+
+    <h4>Cost score</h4>
+    <div class="formula">
+      <p>If <code>CostPerPerson</code> ≤ <code>NormalCost</code>: <code>CostScore</code> = 100</p>
+      <p>Otherwise: <code>CostScore</code> = 100 × <code>NormalCost</code> ÷ <code>CostPerPerson</code> (with the fixed settings, 5342 ÷ <code>CostPerPerson</code>)</p>
+    </div>
+    <div class="why">
+      <p><b>What it does.</b> Compares what the drive spent on each beneficiary with what ElevateX usually spends.</p>
+      <p><b>Why we need it.</b> Money spent only means something when we know how many people it helped. Looking at total spending alone would make small drives look better than they are.</p>
+      <p><b>The thinking behind it.</b> The score is the usual cost divided by the actual cost. If a drive spends twice the usual amount per person, it gets 50. If it spends less than usual, it gets full marks but nothing extra, so one very cheap drive can't hide problems somewhere else.</p>
+    </div>
+
+    <h4>Budget score</h4>
+    <div class="formula">
+      <p>If <code>BudgetUsed</code> ≤ <code>OverspendStart</code>: <code>BudgetScore</code> = 100</p>
+      <p>If <code>BudgetUsed</code> is between the two limits: <code>BudgetScore</code> = 100 − 100 × (<code>BudgetUsed</code> − <code>OverspendStart</code>) ÷ (<code>OverspendZero</code> − <code>OverspendStart</code>)</p>
+      <p>If <code>BudgetUsed</code> ≥ <code>OverspendZero</code>: <code>BudgetScore</code> = 0</p>
+    </div>
+    <div class="why">
+      <p><b>What it does.</b> Checks that the drive stayed inside its fund. With the fixed settings, the middle case loses 2 points for every extra 1% of the fund spent.</p>
+      <p><b>Why we need it.</b> Going over budget takes money away from other drives, so it needs its own penalty.</p>
+      <p><b>The thinking behind it.</b> There is no penalty up to 100% of the fund. After that, the score drops in a straight line and reaches 0 at 150%. We deliberately do not score underspending here. A drive that does less already loses points through cost per person and through impact. If we rewarded spending more, it would cancel out the cost score, because the extra spending and the higher cost per person would balance each other exactly.</p>
+    </div>
+
+    <h4>Turnout score</h4>
+    <div class="formula">
+      <p><code>TurnoutScore</code> = 100 × <code>Volunteers</code> ÷ <code>PlannedVolunteers</code>, up to a limit of <code>TurnoutMax</code> (150)</p>
+    </div>
+    <div class="why">
+      <p><b>What it does.</b> Compares the number of volunteers who came with the number we expected.</p>
+      <p><b>Why we need it.</b> A big turnout shows that the drive reached people and got them involved, so it should be rewarded, even when it goes beyond the plan.</p>
+      <p><b>The thinking behind it.</b> Half the planned turnout gives 50, the planned turnout gives 100, and anything above that earns extra credit up to 150. The limit stops one huge crowd from taking over the whole index.</p>
+    </div>
+
+    <h4>Time score</h4>
+    <div class="formula">
+      <p>If <code>AvgHours</code> ≤ <code>PlannedHours</code>: <code>TimeScore</code> = 100</p>
+      <p>Otherwise: <code>TimeScore</code> = 100 × <code>PlannedHours</code> ÷ <code>AvgHours</code></p>
+    </div>
+    <div class="why">
+      <p><b>What it does.</b> Compares the average hours each volunteer gave with the hours we planned.</p>
+      <p><b>Why we need it.</b> If each volunteer has to give a lot of time, the drive is asking too much of its people. Fewer hours per volunteer means the work was shared well.</p>
+      <p><b>The thinking behind it.</b> The score is the planned hours divided by the actual hours, so doubling the planned hours gives 50. Hours at or below the plan score 100.</p>
+    </div>
+
+    <h3 class="calc-step">Step 3: Three pillars and a bonus</h3>
+
+    <h4>Money score</h4>
+    <div class="formula"><p><code>MoneyScore</code> = √(<code>CostScore</code> × <code>BudgetScore</code>)</p></div>
+    <div class="why">
+      <p><b>What it does.</b> Combines the cost score and the budget score into one score for money.</p>
+      <p><b>Why we need it.</b> A drive can be cheap per person and still overspend, or stay on budget and still waste money. Doing well financially means getting both right.</p>
+      <p><b>The thinking behind it.</b> The square root of the two scores multiplied together is called the geometric mean. It equals the normal average when the two scores are the same, and it falls below the normal average when they are far apart. If either score is 0, the money score is 0.</p>
+    </div>
+
+    <h4>Volunteer score</h4>
+    <div class="formula">
+      <p><code>VolunteerScore</code> = 2 × <code>TurnoutScore</code> × <code>TimeScore</code> ÷ (<code>TurnoutScore</code> + <code>TimeScore</code>)</p>
+      <p>If <code>TurnoutScore</code> + <code>TimeScore</code> is 0, the volunteer score is 0.</p>
+    </div>
+    <div class="why">
+      <p><b>What it does.</b> Combines turnout and time per volunteer into one score for volunteers.</p>
+      <p><b>Why we need it.</b> A big crowd is only good news if the work was shared fairly, and light hours mean little if hardly anyone came.</p>
+      <p><b>The thinking behind it.</b> This is called the harmonic mean. It stays closer to the weaker of the two scores, so a strong result on one can't cover up a weak result on the other. For example, a turnout score of 150 with a time score of 50 gives 75, not the normal average of 100.</p>
+    </div>
+
+    <h4>Impact score</h4>
+    <div class="formula">
+      <p>If <code>ImpactDone</code> &lt; <code>ImpactTarget</code>: <code>ImpactScore</code> = 100 × <code>ImpactDone</code> ÷ <code>ImpactTarget</code></p>
+      <p>Otherwise: <code>ImpactScore</code> = 100</p>
+    </div>
+    <div class="why">
+      <p><b>What it does.</b> Measures what share of the impact target we actually reached.</p>
+      <p><b>Why we need it.</b> Money and volunteers are what we put in. Impact is the reason the drive exists.</p>
+      <p><b>The thinking behind it.</b> Hitting the target gives 100. The target has to be set before the drive, in the unit the drive really produces, like meals served or kilograms collected.</p>
+    </div>
+
+    <h4>Partnership bonus</h4>
+    <div class="formula"><p><code>PartnerBonus</code> = 10 if <code>HasPartner</code> = 1, otherwise 0</p></div>
+    <div class="why">
+      <p><b>What it does.</b> Adds 10 points when the drive worked with at least one outside partner.</p>
+      <p><b>Why we need it.</b> Partnerships help ElevateX reach more people, but not every drive needs one.</p>
+      <p><b>The thinking behind it.</b> It is a bonus on top of the main score, not one of the three pillars, so a drive without a partner doesn't lose anything.</p>
+    </div>
+
+    <h3 class="calc-step">Step 4: The final index</h3>
+    <div class="formula formula-final">
+      <p><code>EDPI</code> = 0.25 × <code>MoneyScore</code> + 0.25 × <code>VolunteerScore</code> + 0.50 × <code>ImpactScore</code> + <code>PartnerBonus</code></p>
+    </div>
+    <div class="why">
+      <p><b>What it does.</b> Adds the three weighted pillars and the bonus to get one final number.</p>
+      <p><b>Why we need it.</b> Members and organisers need a single score so they can compare drives and see whether we are improving.</p>
+      <p><b>The thinking behind it.</b> A weighted sum is easy to check by hand. Impact gets half of the weight because it is the whole point of a drive. Money and volunteers share the other half equally.</p>
+    </div>
+    <div class="table-wrap narrow-table"><table class="data-table">
+      <thead><tr><th>Part</th><th class="num">Highest possible</th></tr></thead>
+      <tbody>
+        <tr><td><code>MoneyScore</code></td><td class="num">100</td></tr>
+        <tr><td><code>VolunteerScore</code></td><td class="num">120 (turnout 150, time 100)</td></tr>
+        <tr><td><code>ImpactScore</code></td><td class="num">100</td></tr>
+        <tr><td>Weighted total</td><td class="num">105</td></tr>
+        <tr><td><code>PartnerBonus</code></td><td class="num">10</td></tr>
+        <tr class="total"><td><code>EDPI</code></td><td class="num">115</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+</section>
+
+<section class="section tight" id="example">
+  <div class="wrap"><div class="prose-wide">
+    <div class="section-head">
+      <h2>Worked example</h2>
+      <p>One drive, scored from start to finish. We planned for 40 volunteers working 4 hours each, with a fund of Rs. 60,000 and a target of 1,000 meals. In the end we spent Rs. 50,000, reached 800 people, had 50 volunteers who gave 150 hours in total, served 900 meals and worked with one outside partner.</p>
+    </div>
+    <div class="table-wrap"><table class="data-table">
+      <thead><tr><th>Variable</th><th>Calculation</th><th class="num">Result</th></tr></thead>
+      <tbody>
+        <tr><td><code>AvgHours</code></td><td>150 ÷ 50</td><td class="num">3 hours</td></tr>
+        <tr><td><code>CostPerPerson</code></td><td>50,000 ÷ 800</td><td class="num">Rs. 62.50</td></tr>
+        <tr><td><code>BudgetUsed</code></td><td>50,000 ÷ 60,000</td><td class="num">0.833</td></tr>
+        <tr><td><code>CostScore</code></td><td>62.50 is more than 53.42, so 5342 ÷ 62.50</td><td class="num">85.47</td></tr>
+        <tr><td><code>BudgetScore</code></td><td>0.833 ≤ 1.00</td><td class="num">100</td></tr>
+        <tr><td><code>TurnoutScore</code></td><td>100 × 50 ÷ 40 = 125, which is within 150</td><td class="num">125</td></tr>
+        <tr><td><code>TimeScore</code></td><td>3 ≤ 4</td><td class="num">100</td></tr>
+        <tr><td><code>MoneyScore</code></td><td>√(85.47 × 100)</td><td class="num">92.45</td></tr>
+        <tr><td><code>VolunteerScore</code></td><td>2 × 125 × 100 ÷ (125 + 100)</td><td class="num">111.11</td></tr>
+        <tr><td><code>ImpactScore</code></td><td>100 × 900 ÷ 1000</td><td class="num">90</td></tr>
+        <tr><td><code>PartnerBonus</code></td><td><code>HasPartner</code> = 1</td><td class="num">10</td></tr>
+        <tr class="total"><td><code>EDPI</code></td><td>0.25 × 92.45 + 0.25 × 111.11 + 0.50 × 90 + 10</td><td class="num">105.89</td></tr>
+      </tbody>
+    </table></div>
+    <p class="after-table">This drive scored 105.89. More volunteers came than we planned and we had a partner, which pushed the score up. But we spent more per person than usual and reached only 90% of our impact target, so the score stayed below the maximum.</p>
+  </div>
+</div>
+</section>
+
+<section class="section tight tint" id="reading">
+  <div class="wrap"><div class="prose">
+    <h2>Reading the score</h2>
+    <p>EDPI does not come with a fixed pass mark, and that is on purpose.</p>
+    <ul>
+      <li><b>100 is the reference point.</b> Every score compares the result with the plan, so 100 means the drive did what it said it would do. A score is easier to understand when it is measured against the drive's own goals and not against a number picked at random.</li>
+      <li><b>Above 100 means the drive beat its plan.</b> This can happen through extra turnout or a partnership. Because turnout is limited and impact can't go past 100, one lucky area can't push a drive far above the rest.</li>
+      <li><b>Below 100 means something fell short, and the pillar scores say what.</b> Look at the money, volunteer and impact scores one by one. The one furthest below 100 is the area to talk about in the debrief.</li>
+      <li><b>Compare a drive with our past drives of the same type.</b> Because every score is measured against that drive's own plan, a rising score over time shows that we are planning better and delivering better.</li>
+    </ul>
+    <p>We chose not to set labels like "good" or "poor" for ranges of scores. Any cut-off would be a guess until ElevateX has scored enough drives to know what a typical result looks like.</p>
+  </div>
+</div>
+</section>
+
+<section class="section tight" id="rules">
+  <div class="wrap"><div class="prose-wide">
+    <div class="section-head">
+      <h2>Data rules</h2>
+      <p>What happens when a number is zero or looks wrong.</p>
+    </div>
+    <div class="table-wrap"><table class="data-table">
+      <thead><tr><th>Situation</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr><td><code>PeopleHelped</code> = 0</td><td><code>CostScore</code> = 0, and the record is flagged</td></tr>
+        <tr><td><code>Spent</code> = 0 and <code>PeopleHelped</code> is more than 0</td><td><code>CostScore</code> = 100</td></tr>
+        <tr><td><code>Volunteers</code> = 0</td><td><code>TurnoutScore</code>, <code>TimeScore</code> and <code>VolunteerScore</code> are all 0</td></tr>
+        <tr><td>Number of <code>HoursEach</code> entries is not equal to <code>Volunteers</code></td><td>The submission is rejected</td></tr>
+        <tr><td>Any <code>HoursEach</code> above <code>MaxHours</code> or below <code>MinHours</code></td><td>Flagged for review</td></tr>
+        <tr><td><code>Spent</code> above 1.5 × <code>Budget</code></td><td>Flagged for review (<code>BudgetScore</code> is already 0)</td></tr>
+        <tr><td>Any planning value is 0 or less</td><td>Rejected, because the plan is not valid</td></tr>
+        <tr><td>A planning value changed after the drive started</td><td>Rejected, because planning values are locked</td></tr>
+      </tbody>
+    </table></div>
+    <p class="after-table">The minimum-hours check matters. A low average raises the time score, so without it a drive could add volunteers who log almost no time and look good on both turnout and time.</p>
+  </div>
+</div>
+</section>
+
+<section class="section tight tint" id="limits">
+  <div class="wrap split" style="align-items:start">
+    <div class="prose">
+      <h2>Why EDPI looks the way it does</h2>
+      <ul>
+        <li><b>Everything is compared with a plan.</b> This makes drives of different sizes comparable.</li>
+        <li><b>Cost is measured per beneficiary.</b> It shows how well money turns into help.</li>
+        <li><b>Geometric mean for money, harmonic mean for volunteers.</b> Both stop a strong result in one area from hiding a weak result in another.</li>
+        <li><b>Impact gets half the weight.</b> It is the purpose of the drive.</li>
+        <li><b>Scores have limits.</b> Without limits, one extreme number could decide the whole index.</li>
+        <li><b>Partnerships are a bonus.</b> They help, but a drive doesn't need one.</li>
+      </ul>
+    </div>
+    <div class="prose">
+      <h2>Limitations</h2>
+      <ul>
+        <li>The weights and limits are choices made by ElevateX. They are not the result of a statistical study, and another organisation might choose different ones.</li>
+        <li>The impact score uses one impact measure per drive. It can't capture how good the help was or how long it lasts.</li>
+        <li>Planned values are set by the organiser, so the index is only fair if targets are realistic and locked before the drive.</li>
+        <li>Volunteer hours are written down by people, so they should be checked against the sign-in sheet.</li>
+        <li>EDPI is new. We will review the settings as more drives are scored.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap"><div class="prose">
+    <h2>Credits and ownership</h2>
+    <p>The ElevateX Drive Performance Index was designed and developed in full by <a href="founder.html">Vivaan Agarwal</a> for ElevateX. This includes the idea, the mathematical framework, the scoring rules and the written explanation. EDPI is the official property of ElevateX and may not be copied or changed without permission.</p>
+    <p><a href="welfare.html" class="arrow-link">See how our drives work</a></p>
+  </div>
+</div>
+</section>
+<script src="edpi.js?v=1" defer></script>
