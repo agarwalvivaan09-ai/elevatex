@@ -32,50 +32,59 @@ document.documentElement.classList.add('js');
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
 
-// Fade sections in, and count numbers up, when they scroll into view
+// Photo viewer: on album pages, tapping a photo opens it large on the page, with previous/next.
+// Without JavaScript the links still open the full-size photo.
 (function () {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const count = (el) => {
-    const target = Number(el.dataset.count);
-    const fmt = (n) => n.toLocaleString('en-IN');
-    if (reduce || !target) { el.textContent = fmt(target); return; }
-    const start = performance.now();
-    const tick = (t) => {
-      const p = Math.min((t - start) / 1100, 1);
-      el.textContent = fmt(Math.round(target * (1 - Math.pow(1 - p, 3))));
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+  const links = Array.from(document.querySelectorAll('.gallery a'));
+  if (!links.length) return;
+  const v = document.createElement('div');
+  v.className = 'viewer';
+  v.setAttribute('role', 'dialog');
+  v.setAttribute('aria-modal', 'true');
+  v.setAttribute('aria-label', 'Photo');
+  v.innerHTML = '<img alt=""><button class="v-close" aria-label="Close">×</button>' +
+    '<button class="v-prev" aria-label="Previous photo">‹</button><button class="v-next" aria-label="Next photo">›</button>' +
+    '<div class="v-count" aria-live="polite"></div>';
+  document.body.appendChild(v);
+  const img = v.querySelector('img');
+  const count = v.querySelector('.v-count');
+  let i = 0;
+  let opener = null;
+  const show = (n) => {
+    i = (n + links.length) % links.length;
+    const a = links[i];
+    img.src = a.getAttribute('href');
+    img.alt = a.querySelector('img').alt;
+    count.textContent = (i + 1) + ' of ' + links.length;
   };
-  if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
-    return;
-  }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('in');
-      e.target.querySelectorAll('[data-count]').forEach(count);
-      io.unobserve(e.target);
-    });
-  }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
-  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-  // Safety net: anything already scrolled past (fast flicks, jumps) is shown too.
-  let queued = false;
-  window.addEventListener('scroll', () => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(() => {
-      queued = false;
-      document.querySelectorAll('.reveal:not(.in)').forEach((el) => {
-        if (el.getBoundingClientRect().top < window.innerHeight) {
-          el.classList.add('in');
-          el.querySelectorAll('[data-count]').forEach(count);
-          io.unobserve(el);
-        }
-      });
-    });
-  }, { passive: true });
+  const close = () => { v.classList.remove('open'); document.body.classList.remove('menu-open'); if (opener) opener.focus(); };
+  links.forEach((a, n) => a.addEventListener('click', (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    opener = a;
+    show(n);
+    v.classList.add('open');
+    document.body.classList.add('menu-open');
+    v.querySelector('.v-close').focus();
+  }));
+  v.querySelector('.v-close').addEventListener('click', close);
+  v.querySelector('.v-prev').addEventListener('click', () => show(i - 1));
+  v.querySelector('.v-next').addEventListener('click', () => show(i + 1));
+  v.addEventListener('click', (e) => { if (e.target === v) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (!v.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(i - 1);
+    if (e.key === 'ArrowRight') show(i + 1);
+  });
+  let x0 = null;
+  v.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  v.addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) show(dx < 0 ? i + 1 : i - 1);
+    x0 = null;
+  });
 })();
 
 // Timeline progress line (Timeline page only)

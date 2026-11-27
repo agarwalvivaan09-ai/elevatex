@@ -7,7 +7,7 @@
   --card: #ffffff;
   --ink: #17191c;
   --ink-2: #3d4148;
-  --muted: #6b6f76;
+  --muted: #5f636a;   /* 5.3:1 on --bg-2, 5.7:1 on --bg */
   --line: #e6e1d6;
   --green: #1f3d2b;
   --green-2: #2c5a3f;
@@ -78,8 +78,6 @@ p:last-child { margin-bottom: 0; }
 .btn-light:hover { background: var(--green-soft); color: var(--green); }
 .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .arrow-link { font-weight: 600; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
-.arrow-link::after { content: '→'; transition: transform 0.15s; }
-.arrow-link:hover::after { transform: translateX(3px); }
 
 /* ---------------------------------------------------------------- header / nav */
 .site-header { position: sticky; top: 0; z-index: 50; background: rgba(250, 248, 243, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color 0.2s; }
@@ -127,7 +125,6 @@ body.menu-open { overflow: hidden; }
 .hero { padding: 56px 0 72px; }
 .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
 .hero h1 { margin-bottom: 20px; }
-.hero h1 em { font-style: italic; color: var(--green); }
 .hero .lede { margin-bottom: 30px; }
 .hero-note { margin-top: 22px; font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
 .dots { display: inline-flex; gap: 4px; }
@@ -436,5 +433,169 @@ a.card:hover .media img { transform: scale(1.03); }
 .hub-split.flip { grid-template-columns: 1.3fr 1fr; }
 @media (max-width: 1100px) { .hub-head .wrap, .hub-split, .hub-split.flip { grid-template-columns: 1fr; } }
 
-/* gallery album pages: each photo opens full size */
-.gallery a { display: block; }
+/* =====================================================================
+   Additions on the redesign branch: brand colours unchanged.
+   Glass is used in a few places only (header, phone menu, photo labels,
+   the numbers panel, the photo viewer). Every glass surface has a solid
+   fallback and turns solid for people who ask for less transparency.
+   ===================================================================== */
+
+[hidden] { display: none !important; }
+
+/* smooth fade between pages in browsers that support it */
+@view-transition { navigation: auto; }
+
+/* ---- glass, defined once ---- */
+:root {
+  --glass-light: rgba(255, 255, 255, 0.78);
+  --glass-cream: rgba(250, 248, 243, 0.72);
+  --glass-dark: rgba(21, 36, 27, 0.62);
+  --glass-edge: rgba(255, 255, 255, 0.55);
+  --glass-blur: blur(14px) saturate(160%);
+}
+
+/* links that read as actions */
+.arrow-link { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.arrow-link:hover { text-decoration-thickness: 2.5px; }
+.back-link { text-decoration: underline; text-underline-offset: 4px; }
+.meta { font-size: 14px; color: var(--muted); margin: 18px 0 10px; }
+
+/* buttons: a little lift on hover, a press you can feel */
+.btn { transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+.btn-primary { box-shadow: 0 6px 16px -8px rgba(31, 61, 43, 0.55); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 22px -10px rgba(31, 61, 43, 0.6); }
+.btn:active { transform: translateY(1px); box-shadow: none; }
+
+/* header: frosted cream */
+.site-header { background: rgba(250, 248, 243, 0.96); }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header { background: var(--glass-cream); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
+  .site-header.scrolled { box-shadow: 0 8px 24px -18px rgba(31, 61, 43, 0.45); }
+}
+
+/* phone menu: frosted sheet over a soft blurred page */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .mobile-menu .scrim { background: rgba(23, 25, 28, 0.25); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  .mobile-menu .sheet { background: rgba(250, 248, 243, 0.9); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); border-left: 1px solid var(--glass-edge); }
+}
+.sheet nav a::after { content: none; }
+
+/* homepage hero: photo labels as small glass tags */
+.collage figcaption { background: rgba(255, 255, 255, 0.92); }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .collage figcaption { background: var(--glass-light); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-edge); }
+}
+
+/* numbers: glass tiles over a soft wash of the logo's hand colours */
+.stats {
+  position: relative; isolation: isolate; border: none; gap: 14px; padding: 14px; overflow: hidden;
+  background:
+    radial-gradient(60% 80% at 10% 20%, rgba(226, 87, 76, 0.22), transparent 70%),
+    radial-gradient(50% 70% at 90% 10%, rgba(233, 162, 59, 0.24), transparent 70%),
+    radial-gradient(60% 80% at 80% 100%, rgba(59, 127, 196, 0.2), transparent 70%),
+    radial-gradient(50% 70% at 20% 100%, rgba(95, 158, 58, 0.22), transparent 70%),
+    var(--bg-2);
+  border-radius: 22px;
+}
+.stat, .stat:nth-child(3n), .stat:nth-last-child(-n + 3), .stats.four .stat, .stats.four .stat:nth-child(3n), .stats.four .stat:nth-child(4n) {
+  border: 1px solid var(--glass-edge); border-radius: 16px; background: rgba(255, 255, 255, 0.9);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .stat, .stat:nth-child(3n), .stat:nth-last-child(-n + 3), .stats.four .stat, .stats.four .stat:nth-child(3n), .stats.four .stat:nth-child(4n) {
+    background: rgba(255, 255, 255, 0.62); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+  }
+}
+.stat > span { color: var(--ink-2); }
+
+/* photo cards (drives, albums): the figure or photo count sits on the photo as a glass tag */
+.drive-grid .card, .cards .card:has(.media) { position: relative; }
+.drive-grid .card:has(.media) .chip, .cards .card:has(.media) .chip {
+  position: absolute; top: 12px; left: 12px; background: rgba(255, 255, 255, 0.94); color: var(--green); border: 1px solid var(--glass-edge);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .drive-grid .card:has(.media) .chip, .cards .card:has(.media) .chip { background: var(--glass-light); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
+}
+
+/* the one dark card on Drives ("Already a member?") */
+.card.card-dark { background: var(--green); border-color: var(--green); color: #fff; }
+.card.card-dark .body { justify-content: center; }
+.card.card-dark h3, .card.card-dark .more { color: #fff; }
+.card.card-dark p { color: #cfdcd3; }
+
+/* text-only cards (departments, Hub features): the name stands out */
+.card:not(:has(.media)) .tag { font-size: 16px; text-transform: none; letter-spacing: 0; color: var(--green); }
+
+/* ---- album pages: an even grid, first photo large ---- */
+.gallery { columns: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.gallery figure { margin: 0; aspect-ratio: 1; border-radius: 12px; }
+.gallery figure:first-child { grid-column: span 2; grid-row: span 2; }
+.gallery a { display: block; height: 100%; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.gallery a:hover img { transform: scale(1.04); }
+
+/* in-page photo viewer, dark glass */
+.viewer { position: fixed; inset: 0; z-index: 120; display: none; align-items: center; justify-content: center; padding: 56px 72px; background: rgba(15, 26, 19, 0.94); }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .viewer { background: rgba(15, 26, 19, 0.8); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+}
+.viewer.open { display: flex; }
+.viewer img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6); }
+.viewer button { position: absolute; width: 48px; height: 48px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.35); background: rgba(255, 255, 255, 0.14); color: #fff; font: inherit; font-size: 22px; cursor: pointer; }
+.viewer button:hover { background: rgba(255, 255, 255, 0.26); }
+.viewer .v-close { top: 16px; right: 16px; }
+.viewer .v-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+.viewer .v-next { right: 16px; top: 50%; transform: translateY(-50%); }
+.viewer .v-count { position: absolute; bottom: 16px; left: 0; right: 0; text-align: center; color: #dfe9e2; font-size: 14px; }
+
+/* ---- Join form: shorter, labels on one line ---- */
+.apply-form label { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 6px; }
+.apply-form label > input:not([type=checkbox]), .apply-form label > textarea { flex-basis: 100%; }
+.apply-form .check { flex-wrap: nowrap; }
+.apply-form details { border-top: 1px solid var(--line); padding-top: 14px; }
+.apply-form summary { cursor: pointer; font-weight: 600; color: var(--green); }
+.apply-form details[open] summary { margin-bottom: 14px; }
+.apply-form details > label + label { margin-top: 14px; }
+
+/* ---- people who ask for less transparency or motion ---- */
+@media (prefers-reduced-transparency: reduce) {
+  .site-header, .mobile-menu .sheet, .collage figcaption, .stat, .drive-grid .card .chip, .cards .card .chip, .viewer {
+    -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  }
+  .site-header { background: var(--bg) !important; }
+  .mobile-menu .sheet { background: var(--bg) !important; }
+  .stat { background: #fff !important; }
+  .collage figcaption, .drive-grid .card .chip, .cards .card .chip { background: #fff !important; }
+  .viewer { background: rgb(15, 26, 19) !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  .btn-primary:hover, .gallery a:hover img { transform: none; }
+}
+
+/* ---- phones ---- */
+@media (max-width: 900px) {
+  .gallery { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  /* two columns, so lists of drives and albums aren't one long scroll */
+  .cards, .drive-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card:has(.media) .body { padding: 14px; }
+  .card:has(.media) .body p { display: none; }
+  .card:has(.media) h3 { font-size: 16px; }
+  .cards:not(:has(.media)), .card.card-dark { grid-template-columns: 1fr; grid-column: 1 / -1; }
+  .cards:has(> :nth-child(3):last-child) { grid-template-columns: 1fr; }
+  .cards:has(> :nth-child(3):last-child) .card .body p { display: block; }
+  .drive-grid .card:has(.media) .chip, .cards .card:has(.media) .chip { top: 8px; left: 8px; font-size: 12px; padding: 4px 9px; }
+  .stats { padding: 10px; gap: 10px; border-radius: 18px; }
+  .stat, .stat:nth-child(3n), .stat:nth-child(2n), .stat:nth-last-child(-n + 3), .stat:nth-last-child(-n + 2) { border: 1px solid var(--glass-edge); }
+  .gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .viewer { padding: 64px 8px; }
+  .viewer .v-prev, .viewer .v-next { top: auto; bottom: 12px; transform: none; }
+  .viewer .v-count { bottom: 26px; }
+}
+
+/* headings that used to have a small label above them keep their breathing room */
+h2 + p, h2 + .lede, .split h2 { margin-top: 0; }
+h2 + p, h2 + .lede { margin-top: 16px; }
+.split h2 { margin-bottom: 16px; }
+.arrow-link + .arrow-link { margin-left: 22px; }

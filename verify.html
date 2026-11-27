@@ -9,7 +9,7 @@
 <meta property="og:title" content="Check a certificate | ElevateX">
 <meta property="og:description" content="Check an ElevateX certificate. Type a certificate ID or a name to see the record from the ElevateX certificate registry.">
 <meta property="og:url" content="https://elevate-x.in/verify.html">
-<meta property="og:image" content="https://elevate-x.in/elevatex-team-kolkata.jpg">
+<meta property="og:image" content="https://elevate-x.in/images/team/elevatex-team-kolkata.jpg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ElevateX">
 <meta name="twitter:card" content="summary_large_image">
@@ -17,22 +17,22 @@
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ElevateX", "item": "https://elevate-x.in/"}, {"@type": "ListItem", "position": 2, "name": "Resources", "item": "https://elevate-x.in/resources.html"}, {"@type": "ListItem", "position": 3, "name": "Check a certificate", "item": "https://elevate-x.in/verify.html"}]}</script>
 
-<link rel="icon" type="image/png" href="logo-icon.png">
-<link rel="apple-touch-icon" href="logo-icon.png">
+<link rel="icon" type="image/png" href="images/brand/logo-icon.png">
+<link rel="apple-touch-icon" href="images/brand/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand"><img loading="lazy" decoding="async" src="logo-icon.png" alt="" width="38" height="38">ElevateX</a>
+    <a href="index.html" class="brand"><img loading="lazy" decoding="async" src="images/brand/logo-icon.png" alt="" width="38" height="38">ElevateX</a>
     <nav class="nav-links" aria-label="Main"><a href="about.html">About</a><a href="welfare.html">Drives</a><a href="fundraising.html">Events</a><a href="unnati.html">Unnati</a><a href="gallery.html">Gallery</a><a href="team.html">Team</a></nav>
     <div class="nav-actions">
-      <a href="contact.html" class="btn btn-ghost">Apply</a>
-      <a href="https://hub.elevate-x.in" class="btn btn-primary">Volunteer login</a>
+      <a href="https://hub.elevate-x.in" class="btn btn-ghost">Member login</a>
+      <a href="contact.html" class="btn btn-primary">Join ElevateX</a>
     </div>
     <button class="menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
   </div>
@@ -41,13 +41,13 @@
   <div class="scrim"></div>
   <div class="sheet">
     <div class="sheet-top">
-      <a href="index.html" class="brand"><img loading="lazy" decoding="async" src="logo-icon.png" alt="" width="38" height="38">ElevateX</a>
+      <a href="index.html" class="brand"><img loading="lazy" decoding="async" src="images/brand/logo-icon.png" alt="" width="38" height="38">ElevateX</a>
       <button class="sheet-close" aria-label="Close menu">×</button>
     </div>
-    <nav aria-label="Main"><a href="about.html">About</a><a href="welfare.html">Drives</a><a href="fundraising.html">Events</a><a href="unnati.html">Unnati</a><a href="gallery.html">Gallery</a><a href="team.html">Team</a><a href="volunteer-hub.html">Hub</a><a href="timeline.html">Timeline</a><a href="blog.html">Blog</a><a href="resources.html" aria-current=page>Resources</a></nav>
+    <nav aria-label="Main"><a href="about.html">About</a><a href="welfare.html">Drives</a><a href="fundraising.html">Events</a><a href="unnati.html">Unnati</a><a href="gallery.html">Gallery</a><a href="team.html">Team</a><a href="volunteer-hub.html">Volunteer Hub</a><a href="timeline.html">Timeline</a><a href="blog.html">Blog</a><a href="resources.html" aria-current=page>Resources</a></nav>
     <div class="sheet-actions">
-      <a href="contact.html" class="btn btn-ghost">Apply to join</a>
-      <a href="https://hub.elevate-x.in" class="btn btn-primary">Volunteer login</a>
+      <a href="contact.html" class="btn btn-primary">Join ElevateX</a>
+      <a href="https://hub.elevate-x.in" class="btn btn-ghost">Member login</a>
     </div>
     <div class="sheet-social"><a href="https://www.instagram.com/elevate.x._/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/company/elevat-ex/" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/elevatex182276?s=21" target="_blank" rel="noopener">X</a></div>
   </div>
@@ -55,22 +55,21 @@
 <main id="main">
 <section class="page-head">
   <div class="wrap narrow" style="margin:0 auto">
-    <span class="eyebrow">Certificates</span>
     <h1>Check an ElevateX certificate</h1>
     <p class="lede">Every certificate ElevateX issues is listed in our registry. Type the certificate ID, or the person's name, to see the record.</p>
   </div>
 </section>
 
-<section class="section tight" style="padding-top:8px">
+<section class="section tight" style="padding-top:var(--s2)">
   <div class="wrap narrow" style="margin:0 auto">
     <form class="verify-form" id="verifyForm" role="search">
       <label for="verifyQ" class="verify-label">Certificate ID or name</label>
       <input id="verifyQ" name="q" placeholder="Certificate ID or full name" autocomplete="off" minlength="3" required>
       <button class="btn btn-primary" type="submit">Check</button>
     </form>
-    <p class="small muted" id="verifyStatus" aria-live="polite" style="margin-top:12px">Loading the registry…</p>
+    <p class="small muted" id="verifyStatus" aria-live="polite" style="margin-top:var(--s3)">Loading the registry…</p>
     <div id="verifyResults" class="verify-results"></div>
-    <p class="small muted" style="margin-top:28px">The registry is kept by the ElevateX HR team and updates here as soon as it changes. Something wrong? Write to <a href="mailto:elevate.x.20.25.ad@gmail.com">elevate.x.20.25.ad@gmail.com</a>.</p>
+    <p class="small muted" style="margin-top:var(--s6)">The registry is kept by the ElevateX HR team and updates here as soon as it changes. Something wrong? Write to <a href="mailto:elevate.x.20.25.ad@gmail.com">elevate.x.20.25.ad@gmail.com</a>.</p>
   </div>
 </section>
 <script src="verify.js" defer></script>
@@ -79,7 +78,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand"><img src="logo-icon.png" alt="" width="40" height="40" loading="lazy">ElevateX</div>
+        <div class="footer-brand"><img src="images/brand/logo-icon.png" alt="" width="40" height="40" loading="lazy">ElevateX</div>
         <p>ElevateX (Elevate X) is a nonprofit run by school students in Kolkata. Drives, financial literacy classes, and the events that pay for them.</p>
         <p><a href="mailto:elevate.x.20.25.ad@gmail.com">elevate.x.20.25.ad@gmail.com</a></p>
       </div>
@@ -103,8 +102,8 @@
           <li><a href="blog.html">Blog</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="verify.html">Check a certificate</a></li>
-          <li><a href="contact.html">Apply to join</a></li>
-          <li><a href="https://hub.elevate-x.in">Volunteer login</a></li>
+          <li><a href="contact.html">Join ElevateX</a></li>
+          <li><a href="https://hub.elevate-x.in">Member login</a></li>
         </ul>
       </div>
       <div>
@@ -113,7 +112,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 ElevateX · Kolkata, India</span>
+      <span>© 2026 ElevateX, Kolkata, India</span>
       <span>Website by Vivaan Agarwal</span>
     </div>
   </div>
