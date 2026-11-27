@@ -22,7 +22,6 @@
     if (val('name').length < 2) return showError('Please add your full name.');
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val('email'))) return showError('Please check your email address.');
     if (val('phone').replace(/\D/g, '').length < 7) return showError('Please add a phone number we can reach you on.');
-    if (val('city').length < 2) return showError('Please tell us your city.');
     if (!val('school')) return showError('Please tell us your school.');
     if (!val('grade')) return showError('Please tell us your class.');
     if (val('why').length < 10) return showError('Please write a line or two about why you want to join.');
@@ -42,7 +41,7 @@
       phone: str(val('phone')),
       school: str(val('school')),
       grade: str(val('grade')),
-      city: str(val('city')),
+      city: str(val('city') || 'Kolkata'),
       departments: { arrayValue: { values: d.getAll('departments').map((x) => ({ stringValue: String(x) })) } },
       why: str(val('why')),
       heard: str(val('heard')),

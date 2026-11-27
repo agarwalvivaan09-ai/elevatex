@@ -42,7 +42,7 @@ NAV = [
     ('team.html', 'Team', 'team'),
 ]
 NAV_MORE = [
-    ('volunteer-hub.html', 'Hub', 'hub'),
+    ('volunteer-hub.html', 'Volunteer Hub', 'hub'),
     ('timeline.html', 'Timeline', 'timeline'),
     ('blog.html', 'Blog', 'blog'),
     ('resources.html', 'Resources', 'resources'),
@@ -75,8 +75,8 @@ def header(active):
     <a href="index.html" class="brand"><img src="images/brand/logo-icon.png" alt="" width="38" height="38">ElevateX</a>
     <nav class="nav-links" aria-label="Main">{links}</nav>
     <div class="nav-actions">
-      <a href="{APPLY}" class="btn btn-ghost">Apply</a>
-      <a href="{HUB}" class="btn btn-primary">Volunteer login</a>
+      <a href="{HUB}" class="nav-login">Member login</a>
+      <a href="{APPLY}" class="btn btn-primary">Join ElevateX</a>
     </div>
     <button class="menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
   </div>
@@ -90,8 +90,8 @@ def header(active):
     </div>
     <nav aria-label="Main">{sheet}</nav>
     <div class="sheet-actions">
-      <a href="{APPLY}" class="btn btn-ghost">Apply to join</a>
-      <a href="{HUB}" class="btn btn-primary">Volunteer login</a>
+      <a href="{APPLY}" class="btn btn-primary">Join ElevateX</a>
+      <a href="{HUB}" class="nav-login">Member login</a>
     </div>
     <div class="sheet-social">{social}</div>
   </div>
@@ -128,8 +128,8 @@ def footer():
           <li><a href="blog.html">Blog</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="verify.html">Check a certificate</a></li>
-          <li><a href="{APPLY}">Apply to join</a></li>
-          <li><a href="{HUB}">Volunteer login</a></li>
+          <li><a href="{APPLY}">Join ElevateX</a></li>
+          <li><a href="{HUB}">Member login</a></li>
         </ul>
       </div>
       <div>
@@ -138,7 +138,7 @@ def footer():
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 ElevateX · Kolkata, India</span>
+      <span>© 2026 ElevateX, Kolkata, India</span>
       <span>Website by Vivaan Agarwal</span>
     </div>
   </div>
@@ -267,7 +267,7 @@ def page(meta, body):
 <link rel="apple-touch-icon" href="images/brand/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -352,7 +352,7 @@ def build_articles():
         a = data[key]
         body = f'''<article class="article"><div class="wrap narrow">
   <a href="team.html" class="back-link">Team</a>
-  <p class="meta" style="margin-top:22px">Founder's note · {esc(who)}, {esc(role)}</p>
+  <p class="meta">Founder's note by {esc(who)}, {esc(role)}</p>
   <h1>A note from {esc(who.split()[0])}, ElevateX co-founder</h1>
   <div class="text">{article_body(a, 'founder')}</div>
   <div class="article-foot"><a href="team.html" class="arrow-link">Meet the team</a><a href="blog.html" class="arrow-link">Read the blog</a></div>
@@ -367,7 +367,7 @@ def build_articles():
         posts.append((key, a['title'], date.strip(), by, mins))
         body = f'''<article class="article"><div class="wrap narrow">
   <a href="blog.html" class="back-link">All posts</a>
-  <p class="meta" style="margin-top:22px">{esc(date.strip())} · {esc(by)} · {mins} min read</p>
+  <p class="meta">By {esc(by)}, {esc(date.strip())}. {mins} min read.</p>
   <h1>{esc(a['title'])}</h1>
   <div class="text">{article_body(a, 'blog')}</div>
   <div class="article-foot"><a href="blog.html" class="arrow-link">More from the blog</a><a href="{APPLY}" class="arrow-link">Join ElevateX</a></div>
@@ -375,17 +375,30 @@ def build_articles():
         first = a['paras'][0][:150].rsplit(' ', 1)[0] + '…'
         pages.append(({'file': f'{key}.html', 'title': a['title'], 'description': first, 'nav': 'blog', 'ogtype': 'article'}, body))
     items = ''.join(
-        f'''<a class="post reveal" href="{k}.html"><div><div class="meta">{esc(d)} · {mins} min read</div><h3>{esc(t)}</h3><div class="meta">{esc(by)}</div></div><span class="go" aria-hidden="true">→</span></a>'''
+        f'''<a class="post" href="{k}.html"><h3>{esc(t)}</h3><div class="meta">By {esc(by)}, {esc(d)}. {mins} min read.</div></a>'''
         for k, t, d, by, mins in posts
     )
     blog = f'''<section class="page-head"><div class="wrap">
-  <span class="eyebrow">Blog</span>
   <h1>The ElevateX blog: written by our members</h1>
   <p class="lede">What it has been like to build ElevateX, from the people doing it. Unedited, in their own words.</p>
 </div></section>
-<section class="section tight" style="padding-top:8px"><div class="wrap"><div class="post-list">{items}</div></div></section>'''
+<section class="section tight" style="padding-top:var(--s2)"><div class="wrap"><div class="post-list">{items}</div></div></section>'''
     pages.append(({'file': 'blog.html', 'title': 'Blog', 'description': 'Posts by ElevateX members about building a student-run nonprofit, running events and why financial literacy matters.', 'nav': 'blog'}, blog))
     return pages
+
+
+def thumb(path, size=640):
+    """A small preview of a photo for grids and album covers (images/thumbs/), made once by the build.
+    The full photo is still what opens when someone taps it."""
+    src = ROOT / path
+    out = ROOT / 'images' / 'thumbs' / Path(path).name
+    if Image and src.exists() and (not out.exists() or out.stat().st_mtime < src.stat().st_mtime):
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with Image.open(src) as im:
+            im = im.convert('RGB')
+            im.thumbnail((size, size), Image.LANCZOS)
+            im.save(out, quality=78, optimize=True, progressive=True)
+    return f'images/thumbs/{Path(path).name}' if out.exists() else path
 
 
 GALLERY_GROUPS = [
@@ -404,7 +417,7 @@ def build_gallery():
     for key, title, lede in GALLERY_GROUPS:
         cards = ''.join(
             f'''
-      <a class="card reveal" href="gallery-{a['slug']}.html"><div class="media"><img src="{a['photos'][0][0]}" alt="{esc(a['photos'][0][1])}"></div><div class="body"><h3>{esc(a['title'])}</h3><p>{esc(a['lede'])}</p><span class="chip">{len(a['photos'])} photo{'s' if len(a['photos']) != 1 else ''}</span></div></a>'''
+      <a class="card" href="gallery-{a['slug']}.html"><div class="media"><img src="{thumb(a['photos'][0][0])}" alt="{esc(a['photos'][0][1])}"></div><div class="body"><h3>{esc(a['title'])}</h3><p>{esc(a['lede'])}</p><span class="chip">{len(a['photos'])} photo{'s' if len(a['photos']) != 1 else ''}</span></div></a>'''
             for a in albums if a['group'] == key)
         groups.append(f'''<section class="section tight" id="{key}">
   <div class="wrap">
@@ -418,7 +431,6 @@ def build_gallery():
 </section>''')
     index = f'''<section class="page-head">
   <div class="wrap">
-    <span class="eyebrow">Gallery</span>
     <h1>ElevateX in photos</h1>
     <p class="lede">{total} photos from our drives, Project Unnati and the events that fund them. Pick an album to see all its photos.</p>
   </div>
@@ -428,12 +440,12 @@ def build_gallery():
                    'description': f'Photos of ElevateX in Kolkata: clean-ups, food, umbrella and plantation drives, stray feeding, Project Unnati and our fundraising events. {total} photos.'}, index))
     for a in albums:
         figs = '\n'.join(
-            f'      <figure><a href="{f}" target="_blank" rel="noopener"><img src="{f}" alt="{esc(alt)}"{" data-eager" if i == 0 else ""}></a></figure>'
+            f'      <figure><a href="{f}"><img src="{f if i == 0 else thumb(f)}" alt="{esc(alt)}"{" data-eager" if i == 0 else ""}></a></figure>'
             for i, (f, alt) in enumerate(a['photos']))
         others = [b for b in albums if b['slug'] != a['slug'] and b['group'] == a['group']][:3]
         more = ''.join(
             f'''
-      <a class="card reveal" href="gallery-{b['slug']}.html"><div class="media"><img src="{b['photos'][0][0]}" alt="{esc(b['photos'][0][1])}"></div><div class="body"><h3>{esc(b['title'])}</h3><span class="chip">{len(b['photos'])} photo{'s' if len(b['photos']) != 1 else ''}</span></div></a>'''
+      <a class="card" href="gallery-{b['slug']}.html"><div class="media"><img src="{thumb(b['photos'][0][0])}" alt="{esc(b['photos'][0][1])}"></div><div class="body"><h3>{esc(b['title'])}</h3><span class="chip">{len(b['photos'])} photo{'s' if len(b['photos']) != 1 else ''}</span></div></a>'''
             for b in others)
         more_section = f'''
 <section class="section tight">
@@ -441,19 +453,19 @@ def build_gallery():
     <div class="section-head"><h2>More albums</h2></div>
     <div class="cards">{more}
     </div>
-    <p style="margin-top:28px"><a href="gallery.html" class="arrow-link">All albums</a></p>
+    <p style="margin-top:var(--s6)"><a href="gallery.html" class="arrow-link">All albums</a></p>
   </div>
 </section>''' if others else ''
         body = f'''<section class="page-head">
   <div class="wrap">
-    <a href="gallery.html" class="back-link">Gallery</a>
-    <span class="eyebrow" style="display:flex;margin-top:22px">{len(a['photos'])} photos</span>
+    <a href="gallery.html" class="back-link">Back to the gallery</a>
+    <p class="meta">{len(a['photos'])} photos</p>
     <h1>{esc(a['title'])}</h1>
     <p class="lede">{esc(a['lede'])}</p>
   </div>
 </section>
 
-<section class="section tight" style="padding-top:8px">
+<section class="section tight" style="padding-top:var(--s2)">
   <div class="wrap">
     <div class="gallery">
 {figs}

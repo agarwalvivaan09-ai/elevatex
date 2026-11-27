@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="images/brand/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -31,8 +31,8 @@
     <a href="index.html" class="brand"><img loading="lazy" decoding="async" src="images/brand/logo-icon.png" alt="" width="38" height="38">ElevateX</a>
     <nav class="nav-links" aria-label="Main"><a href="about.html">About</a><a href="welfare.html">Drives</a><a href="fundraising.html" aria-current=page>Events</a><a href="unnati.html">Unnati</a><a href="gallery.html">Gallery</a><a href="team.html">Team</a></nav>
     <div class="nav-actions">
-      <a href="contact.html" class="btn btn-ghost">Apply</a>
-      <a href="https://hub.elevate-x.in" class="btn btn-primary">Volunteer login</a>
+      <a href="https://hub.elevate-x.in" class="nav-login">Member login</a>
+      <a href="contact.html" class="btn btn-primary">Join ElevateX</a>
     </div>
     <button class="menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
   </div>
@@ -44,10 +44,10 @@
       <a href="index.html" class="brand"><img loading="lazy" decoding="async" src="images/brand/logo-icon.png" alt="" width="38" height="38">ElevateX</a>
       <button class="sheet-close" aria-label="Close menu">×</button>
     </div>
-    <nav aria-label="Main"><a href="about.html">About</a><a href="welfare.html">Drives</a><a href="fundraising.html" aria-current=page>Events</a><a href="unnati.html">Unnati</a><a href="gallery.html">Gallery</a><a href="team.html">Team</a><a href="volunteer-hub.html">Hub</a><a href="timeline.html">Timeline</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a></nav>
+    <nav aria-label="Main"><a href="about.html">About</a><a href="welfare.html">Drives</a><a href="fundraising.html" aria-current=page>Events</a><a href="unnati.html">Unnati</a><a href="gallery.html">Gallery</a><a href="team.html">Team</a><a href="volunteer-hub.html">Volunteer Hub</a><a href="timeline.html">Timeline</a><a href="blog.html">Blog</a><a href="resources.html">Resources</a></nav>
     <div class="sheet-actions">
-      <a href="contact.html" class="btn btn-ghost">Apply to join</a>
-      <a href="https://hub.elevate-x.in" class="btn btn-primary">Volunteer login</a>
+      <a href="contact.html" class="btn btn-primary">Join ElevateX</a>
+      <a href="https://hub.elevate-x.in" class="nav-login">Member login</a>
     </div>
     <div class="sheet-social"><a href="https://www.instagram.com/elevate.x._/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/company/elevat-ex/" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/elevatex182276?s=21" target="_blank" rel="noopener">X</a></div>
   </div>
@@ -55,17 +55,16 @@
 <main id="main">
 <section class="page-head">
   <div class="wrap">
-    <span class="eyebrow">Events</span>
     <h1>ElevateX events &amp; fundraisers</h1>
     <p class="lede">Our events pay for our drives. They're also the one thing the whole organisation works on together: Project Operations runs the event, Finance handles the money, and Marketing gets people through the door.</p>
   </div>
 </section>
 
-<section class="section tight" style="padding-top:8px">
+<section class="section tight" style="padding-top:var(--s2)">
   <div class="wrap">
     <div class="section-head"><h2>Five events in eight months</h2></div>
     <div>
-      <article class="event reveal">
+      <article class="event">
         <div class="pic"><img width="1599" height="1066" src="images/gallery/elevatex-gallery-tech-tonik-4.jpg" alt="Guests playing the game tables at ElevateX's Tech Tonik" fetchpriority="high"></div>
         <div>
           <div class="date">10 May 2025</div>
@@ -74,7 +73,7 @@
           <div class="facts"><span class="chip">100+ attendees</span><span class="chip">First fundraiser</span></div>
         </div>
       </article>
-      <article class="event reveal">
+      <article class="event">
         <div class="pic"><img loading="lazy" decoding="async" width="901" height="1600" src="images/events/elevatex-retrograde.jpg" alt="Guests dancing at Elevate X's Retrograde under purple lights"></div>
         <div>
           <div class="date">20 July 2025</div>
@@ -83,7 +82,7 @@
           <div class="facts"><span class="chip">160+ attendees</span><span class="chip">160 saplings planted</span></div>
         </div>
       </article>
-      <article class="event reveal">
+      <article class="event">
         <div class="pic"><img loading="lazy" decoding="async" width="1168" height="1178" src="images/events/elevatex-zenith-poster.jpeg" alt="ElevateX Zenith 2025 poster: Where ambition meets opportunity"></div>
         <div>
           <div class="date">17 August 2025</div>
@@ -92,7 +91,7 @@
           <div class="facts"><span class="chip">14 teams</span><span class="chip">Free entry</span><span class="chip">Online</span></div>
         </div>
       </article>
-      <article class="event reveal">
+      <article class="event">
         <div class="pic"><img loading="lazy" decoding="async" width="1599" height="1066" src="images/events/elevatex-football-fiesta.jpg" alt="Players during an ElevateX Football Fiesta match"></div>
         <div>
           <div class="date">9 October 2025</div>
@@ -101,14 +100,14 @@
           <div class="facts"><span class="chip">14 teams</span><span class="chip">First sponsored event</span></div>
         </div>
       </article>
-      <article class="event reveal">
+      <article class="event">
         <div class="pic"><img loading="lazy" decoding="async" width="1600" height="1067" src="images/events/elevatex-euphoria-team.jpeg" alt="The Elevate X team in front of the Euphoria sign"></div>
         <div>
           <div class="date">13 December 2025</div>
           <h3>Euphoria: Winterland</h3>
           <p>Our biggest event so far. More than 450 people at Orchid Banquets in Kolkata, three months of planning, and a full stage production that nearly didn't happen.</p>
           <div class="facts"><span class="chip">450+ attendees</span><span class="chip">3 months of planning</span></div>
-          <p style="margin-top:16px"><a href="euphoria.html" class="arrow-link">Read the full story</a></p>
+          <p style="margin-top:var(--s4)"><a href="euphoria.html" class="arrow-link">Read the full story</a></p>
         </div>
       </article>
     </div>
@@ -117,8 +116,8 @@
 
 <section class="section tight">
   <div class="wrap">
-    <p style="margin:0 0 28px"><a href="gallery.html#events" class="arrow-link">See photos from our events</a></p>
-    <div class="band warm reveal">
+    <p style="margin:0 0 var(--s6)"><a href="gallery.html#events" class="arrow-link">See photos from our events</a></p>
+    <div class="band warm">
       <div><h2>Sponsor an event</h2><p>Football Fiesta was our first sponsored event, and Euphoria was backed by sponsors including Trendoraz and Grid Iron. If your brand wants to reach a few hundred students in Kolkata, we'd like to hear from you.</p></div>
       <a href="mailto:elevate.x.20.25.ad@gmail.com?subject=Sponsoring%20an%20ElevateX%20event" class="btn btn-primary">Write to us</a>
     </div>
@@ -153,8 +152,8 @@
           <li><a href="blog.html">Blog</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="verify.html">Check a certificate</a></li>
-          <li><a href="contact.html">Apply to join</a></li>
-          <li><a href="https://hub.elevate-x.in">Volunteer login</a></li>
+          <li><a href="contact.html">Join ElevateX</a></li>
+          <li><a href="https://hub.elevate-x.in">Member login</a></li>
         </ul>
       </div>
       <div>
@@ -163,7 +162,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 ElevateX · Kolkata, India</span>
+      <span>© 2026 ElevateX, Kolkata, India</span>
       <span>Website by Vivaan Agarwal</span>
     </div>
   </div>
