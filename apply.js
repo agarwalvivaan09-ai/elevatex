@@ -93,7 +93,7 @@
       const lines = [['Name', val('name')], ['Email', val('email')], ['Phone', val('phone')], ['School', val('school')], ['Class', val('grade')], ['City', val('city')],
         ['Departments', d.getAll('departments').join(', ')], ['Why I want to join', val('why')], ['How I heard about ElevateX', val('heard')], ['Availability', val('availability')]];
       const text = lines.filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join('\n');
-      mail.href = `mailto:elevate.x.20.25.ad@gmail.com?subject=${encodeURIComponent('Application to join ElevateX: ' + val('name'))}&body=${encodeURIComponent(text)}`;
+      mail.href = `mailto:mail@elevate-x.in?subject=${encodeURIComponent('Application to join ElevateX: ' + val('name'))}&body=${encodeURIComponent(text)}`;
       mail.hidden = false;
     }
   });

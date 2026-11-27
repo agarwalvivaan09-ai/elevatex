@@ -25,7 +25,7 @@ SRC = ROOT / '_src'
 SITE = 'https://elevate-x.in'
 HUB = 'https://hub.elevate-x.in'
 APPLY = 'contact.html'
-EMAIL = 'elevate.x.20.25.ad@gmail.com'
+EMAIL = 'mail@elevate-x.in'
 
 try:
     from PIL import Image
@@ -154,7 +154,7 @@ SCHEMA = """<script type="application/ld+json">
 "founder":[{"@id":"https://elevate-x.in/team.html#vivaan"},{"@id":"https://elevate-x.in/team.html#devyansh"},{"@id":"https://elevate-x.in/team.html#samridh"}],
 "description":"ElevateX is a nonprofit run by school students in Kolkata: welfare drives, Project Unnati financial literacy workshops, and fundraising events.",
 "areaServed":"Kolkata, India","address":{"@type":"PostalAddress","addressLocality":"Kolkata","addressRegion":"West Bengal","addressCountry":"IN"},
-"email":"elevate.x.20.25.ad@gmail.com",
+"email":"mail@elevate-x.in",
 "sameAs":["https://www.instagram.com/elevate.x._/","https://www.linkedin.com/company/elevat-ex/","https://x.com/elevatex182276","https://linktr.ee/elevate.x"]},
 {"@type":"WebSite","@id":"https://elevate-x.in/#website","name":"ElevateX","alternateName":"Elevate X","url":"https://elevate-x.in/","publisher":{"@id":"https://elevate-x.in/#org"}}
 ]}
