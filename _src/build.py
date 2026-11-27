@@ -72,7 +72,7 @@ def header(active):
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap nav">
-    <a href="index.html" class="brand"><img src="logo-icon.png" alt="" width="38" height="38">ElevateX</a>
+    <a href="index.html" class="brand"><img src="images/brand/logo-icon.png" alt="" width="38" height="38">ElevateX</a>
     <nav class="nav-links" aria-label="Main">{links}</nav>
     <div class="nav-actions">
       <a href="{APPLY}" class="btn btn-ghost">Apply</a>
@@ -85,7 +85,7 @@ def header(active):
   <div class="scrim"></div>
   <div class="sheet">
     <div class="sheet-top">
-      <a href="index.html" class="brand"><img src="logo-icon.png" alt="" width="38" height="38">ElevateX</a>
+      <a href="index.html" class="brand"><img src="images/brand/logo-icon.png" alt="" width="38" height="38">ElevateX</a>
       <button class="sheet-close" aria-label="Close menu">×</button>
     </div>
     <nav aria-label="Main">{sheet}</nav>
@@ -104,7 +104,7 @@ def footer():
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand"><img src="logo-icon.png" alt="" width="40" height="40" loading="lazy">ElevateX</div>
+        <div class="footer-brand"><img src="images/brand/logo-icon.png" alt="" width="40" height="40" loading="lazy">ElevateX</div>
         <p>ElevateX (Elevate X) is a nonprofit run by school students in Kolkata. Drives, financial literacy classes, and the events that pay for them.</p>
         <p><a href="mailto:{EMAIL}">{EMAIL}</a></p>
       </div>
@@ -150,7 +150,7 @@ def footer():
 SCHEMA = """<script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"NGO","@id":"https://elevate-x.in/#org","name":"ElevateX","alternateName":["Elevate X","ElevateX Kolkata","Elevate X Kolkata","ElevateX Nonprofit"],
-"url":"https://elevate-x.in/","logo":"https://elevate-x.in/logo-icon.png","foundingDate":"2025-03-08",
+"url":"https://elevate-x.in/","logo":"https://elevate-x.in/images/brand/logo-icon.png","foundingDate":"2025-03-08",
 "founder":[{"@id":"https://elevate-x.in/team.html#vivaan"},{"@id":"https://elevate-x.in/team.html#devyansh"},{"@id":"https://elevate-x.in/team.html#samridh"}],
 "description":"ElevateX is a nonprofit run by school students in Kolkata: welfare drives, Project Unnati financial literacy workshops, and fundraising events.",
 "areaServed":"Kolkata, India","address":{"@type":"PostalAddress","addressLocality":"Kolkata","addressRegion":"West Bengal","addressCountry":"IN"},
@@ -163,21 +163,21 @@ SCHEMA = """<script type="application/ld+json">
 # People: tells Google who founded and runs ElevateX, so searches for their names connect to the
 # organisation. Same names, roles, photos and links as the Team page.
 FOUNDERS = [
-    ('vivaan', 'Vivaan Agarwal', 'Founder, former CEO & Chairman', 'founder.html', 'elevatex-vivaan-agarwal.jpg',
+    ('vivaan', 'Vivaan Agarwal', 'Founder, former CEO & Chairman', 'founder.html', 'images/team/elevatex-vivaan-agarwal.jpg',
      ['https://www.instagram.com/vivaan_agarwal__/', 'https://agarwalvivaan09-ai.github.io/vivaan-agarwal-website-3.0/']),
-    ('devyansh', 'Devyansh Tolasaria', 'Founder, former COO & Vice Chairman', 'founder2.html', 'elevatex-devyansh-tolasaria.jpeg',
+    ('devyansh', 'Devyansh Tolasaria', 'Founder, former COO & Vice Chairman', 'founder2.html', 'images/team/elevatex-devyansh-tolasaria.jpeg',
      ['https://www.instagram.com/devyanshtolasaria_7']),
-    ('samridh', 'Samridh Sanganeria', 'Founder, former CFO', 'founder3.html', 'elevatex-samridh-sanganeria.jpeg',
+    ('samridh', 'Samridh Sanganeria', 'Founder, former CFO', 'founder3.html', 'images/team/elevatex-samridh-sanganeria.jpeg',
      ['https://www.instagram.com/samridhsanganeria']),
 ]
 ADVISORS = [
-    ('krishank', 'Krishank Jain', 'Former CFO', 'elevatex-krishank-jain.jpg', ['https://www.instagram.com/krishankjain_']),
-    ('kaschith', 'Kaschith Saraogi', 'Former Head of Drives', 'elevatex-kaschith-saraogi.jpg', ['https://www.instagram.com/kaschith_saraogi']),
-    ('abhaay', 'Abhaay Jhawar', 'Former CMO & Head of Operations', 'elevatex-abhaay-jhawar.jpeg',
+    ('krishank', 'Krishank Jain', 'Former CFO', 'images/team/elevatex-krishank-jain.jpg', ['https://www.instagram.com/krishankjain_']),
+    ('kaschith', 'Kaschith Saraogi', 'Former Head of Drives', 'images/team/elevatex-kaschith-saraogi.jpg', ['https://www.instagram.com/kaschith_saraogi']),
+    ('abhaay', 'Abhaay Jhawar', 'Former CMO & Head of Operations', 'images/team/elevatex-abhaay-jhawar.jpeg',
      ['https://www.instagram.com/abhaay09', 'https://www.linkedin.com/in/abhaay-jhawar-054734370']),
-    ('pragya', 'Pragya Chharia', 'Chief Marketing Officer', 'elevatex-pragya-chharia.jpg', ['https://www.instagram.com/pragyachharia._']),
+    ('pragya', 'Pragya Chharia', 'Chief Marketing Officer', 'images/team/elevatex-pragya-chharia.jpg', ['https://www.instagram.com/pragyachharia._']),
     ('nityam', 'Nityam Chaurasia', 'Director of Events', None, []),
-    ('yaahvi', 'Yaahvi Kamalia', 'Director of Events', 'elevatex-yaahvi-kamalia.jpg', ['https://www.instagram.com/yaahvikamalia']),
+    ('yaahvi', 'Yaahvi Kamalia', 'Director of Events', 'images/team/elevatex-yaahvi-kamalia.jpg', ['https://www.instagram.com/yaahvikamalia']),
 ]
 ORG = {'@id': f'{SITE}/#org'}
 
@@ -243,7 +243,7 @@ def page(meta, body):
     url = f'{SITE}/' if name == 'index.html' else f'{SITE}/{name}'
     title = meta['title']
     full_title = title if 'ElevateX' in title else f'{title} | ElevateX'
-    image = meta.get('image', 'elevatex-team-kolkata.jpg')
+    image = meta.get('image', 'images/team/elevatex-team-kolkata.jpg')
     return f'''<!DOCTYPE html>
 <html lang="en-IN">
 <head>
@@ -263,8 +263,8 @@ def page(meta, body):
 {'<meta name="google-site-verification" content="BRuGEfzzq23Uh3XquKvL4vKrcuAyaFd01iYPJiQE5AU">' if name == 'index.html' else ''}
 {SCHEMA if name == 'index.html' else breadcrumbs(meta)}{people_schema(name)}
 {meta.get('extra_head', '')}
-<link rel="icon" type="image/png" href="logo-icon.png">
-<link rel="apple-touch-icon" href="logo-icon.png">
+<link rel="icon" type="image/png" href="images/brand/logo-icon.png">
+<link rel="apple-touch-icon" href="images/brand/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -357,7 +357,7 @@ def build_articles():
   <div class="text">{article_body(a, 'founder')}</div>
   <div class="article-foot"><a href="team.html" class="arrow-link">Meet the team</a><a href="blog.html" class="arrow-link">Read the blog</a></div>
 </div></article>'''
-        pages.append(({'file': f'{key}.html', 'title': f"A note from {who}", 'description': f"Why ElevateX exists, in {who.split()[0]}'s words. {who}: {role}.", 'nav': 'team', 'ogtype': 'article', 'image': 'elevatex-team-kolkata.jpg'}, body))
+        pages.append(({'file': f'{key}.html', 'title': f"A note from {who}", 'description': f"Why ElevateX exists, in {who.split()[0]}'s words. {who}: {role}.", 'nav': 'team', 'ogtype': 'article', 'image': 'images/team/elevatex-team-kolkata.jpg'}, body))
     posts = []
     for key in ['blog4', 'blog1', 'blog2', 'blog3']:
         a = data[key]
