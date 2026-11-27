@@ -153,6 +153,33 @@ SCHEMA = """<script type="application/ld+json">
 ]}
 </script>"""
 
+# Breadcrumbs: the trail Google can show above a result (elevate-x.in › Blog › Post).
+# Pages not listed here sit directly under the homepage.
+PARENTS = {
+    'blog1.html': ('Blog', 'blog.html'), 'blog2.html': ('Blog', 'blog.html'),
+    'blog3.html': ('Blog', 'blog.html'), 'blog4.html': ('Blog', 'blog.html'),
+    'founder.html': ('Team', 'team.html'), 'founder2.html': ('Team', 'team.html'),
+    'founder3.html': ('Team', 'team.html'),
+    'euphoria.html': ('Events & fundraisers', 'fundraising.html'),
+    'verify.html': ('Resources', 'resources.html'),
+}
+
+
+def breadcrumbs(meta):
+    name = meta['file']
+    if name in ('index.html', '404.html'):
+        return ''
+    trail = [('ElevateX', f'{SITE}/')]
+    if name in PARENTS:
+        label, href = PARENTS[name]
+        trail.append((label, f'{SITE}/{href}'))
+    trail.append((meta['title'], f'{SITE}/{name}'))
+    items = [{'@type': 'ListItem', 'position': i, 'name': label, 'item': url}
+             for i, (label, url) in enumerate(trail, 1)]
+    data = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': items}
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
+
+
 def page(meta, body):
     name = meta['file']
     url = f'{SITE}/' if name == 'index.html' else f'{SITE}/{name}'
@@ -176,7 +203,7 @@ def page(meta, body):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1F3D2B">
 {'<meta name="google-site-verification" content="BRuGEfzzq23Uh3XquKvL4vKrcuAyaFd01iYPJiQE5AU">' if name == 'index.html' else ''}
-{SCHEMA if name == 'index.html' else ''}
+{SCHEMA if name == 'index.html' else breadcrumbs(meta)}
 {meta.get('extra_head', '')}
 <link rel="icon" type="image/png" href="logo-icon.png">
 <link rel="apple-touch-icon" href="logo-icon.png">
